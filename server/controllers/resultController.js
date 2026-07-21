@@ -151,25 +151,18 @@ console.log("=================================");
   }
 };
 
-// ======================================
-// Result History By Date
-// ======================================
-// ======================================
-// Result History By Date (Pagination)
+/// ======================================
+// Result History By Date (Public)
 // ======================================
 const getResultHistory = async (req, res) => {
   try {
-    const { date } = req.query;
+    const date =
+      req.query.date ||
+      new Date().toISOString().split("T")[0];
 
-    let page = parseInt(req.query.page) || 1;
-    let limit = parseInt(req.query.limit) || 10;
-
-    if (!date) {
-      return res.status(400).json({
-        success: false,
-        message: "Date is required.",
-      });
-    }
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
 
     const now = new Date();
 
@@ -178,22 +171,18 @@ const getResultHistory = async (req, res) => {
       visibleAt: { $lte: now },
     };
 
-    // Total Records
     const totalResults = await Result.countDocuments(query);
 
-    // Total Pages
     const totalPages = Math.ceil(totalResults / limit);
 
-    // Current Page Data
     const results = await Result.find(query)
       .sort({ visibleAt: 1 })
-      .skip((page - 1) * limit)
+      .skip(skip)
       .limit(limit);
 
     return res.status(200).json({
       success: true,
       data: results,
-
       pagination: {
         currentPage: page,
         totalPages,
@@ -203,7 +192,6 @@ const getResultHistory = async (req, res) => {
         hasPrevPage: page > 1,
       },
     });
-
   } catch (error) {
     return res.status(500).json({
       success: false,
@@ -211,25 +199,45 @@ const getResultHistory = async (req, res) => {
     });
   }
 };
+
 // ======================================
 // Get Today's Results (Admin)
 // ======================================
 const getTodayResults = async (req, res) => {
   try {
-    const today = new Date().toISOString().split("T")[0];
+    const date =
+      req.query.date ||
+      new Date().toISOString().split("T")[0];
 
-    const results = await Result.find({
-      drawDate: today,
-    }).sort({
-      visibleAt: 1,
-    });
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+
+    const query = {
+      drawDate: date,
+    };
+
+    const totalResults = await Result.countDocuments(query);
+
+    const totalPages = Math.ceil(totalResults / limit);
+
+    const results = await Result.find(query)
+      .sort({ visibleAt: 1 })
+      .skip(skip)
+      .limit(limit);
 
     return res.status(200).json({
       success: true,
-      count: results.length,
       data: results,
+      pagination: {
+        currentPage: page,
+        totalPages,
+        totalResults,
+        limit,
+        hasNextPage: page < totalPages,
+        hasPrevPage: page > 1,
+      },
     });
-
   } catch (error) {
     return res.status(500).json({
       success: false,

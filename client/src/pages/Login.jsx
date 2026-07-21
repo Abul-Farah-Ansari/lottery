@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -105,6 +105,12 @@ const handleLogin = async (e) => {
         >
           Login
         </button>
+        <Link
+    to="/forgot-password"
+    className="text-blue-600 hover:underline"
+>
+    Forgot Password?
+</Link>
       </form>
     </div>
   );

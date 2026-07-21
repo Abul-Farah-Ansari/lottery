@@ -68,9 +68,7 @@ function LiveResult() {
             Congratulations
           </h2>
 
-          <div className="winner-name">
-            {result.data.winnerName}
-          </div>
+          
 
           <div className="divider"></div>
 

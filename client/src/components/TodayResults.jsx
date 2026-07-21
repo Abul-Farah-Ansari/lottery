@@ -86,10 +86,9 @@ function TodayResults({
     try {
       setLoading(true);
 
-      const response = await api.get(
-        `/result/history?date=${selectedDate}&page=${page}&limit=10`
-      );
-
+  const response = await api.get(
+  `/result/today?date=${selectedDate}&page=${page}&limit=10`
+);
       const data = response.data.data || [];
 
       setResults(data);
