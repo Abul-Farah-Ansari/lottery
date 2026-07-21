@@ -1,0 +1,71 @@
+.countdown-card{
+    padding:30px;
+    border-radius:20px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    text-align:center;
+    color:#fff;
+}
+
+.countdown-badge{
+    display:inline-block;
+    background:#f7b500;
+    color:#111;
+    padding:8px 20px;
+    border-radius:30px;
+    font-weight:700;
+    margin-bottom:20px;
+}
+
+.draw-time{
+    font-size:28px;
+    margin-bottom:25px;
+}
+
+.countdown-grid{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.time-box{
+    width:110px;
+    padding:20px;
+    border-radius:18px;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.time-box h1{
+    font-size:42px;
+    margin:0;
+    color:#f7b500;
+}
+
+.time-box span{
+    display:block;
+    margin-top:8px;
+    color:#ddd;
+}
+
+.waiting-text{
+    margin-top:25px;
+    color:#bbb;
+}
+
+@media(max-width:768px){
+
+.time-box{
+    width:90px;
+}
+
+.time-box h1{
+    font-size:34px;
+}
+
+.draw-time{
+    font-size:22px;
+}
+
+}
