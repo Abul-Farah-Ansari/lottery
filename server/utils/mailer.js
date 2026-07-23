@@ -1,37 +1,47 @@
-const path = require("path");
-require("dotenv").config({
-  path: path.join(__dirname, "../.env"),
-});
-
 const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
-  host: process.env.BREVO_HOST,
-  port: Number(process.env.BREVO_PORT),
+  host: "smtp-relay.brevo.com",
+  port: 587,
   secure: false,
   requireTLS: true,
   auth: {
     user: process.env.BREVO_USER,
     pass: process.env.BREVO_PASS,
   },
+  connectionTimeout: 60000,
+  greetingTimeout: 60000,
+  socketTimeout: 60000,
+  tls: {
+    rejectUnauthorized: false,
+  },
 });
 
-// ✅ Add this block here
+// Verify SMTP connection
 transporter.verify((error, success) => {
   if (error) {
-    console.error("SMTP Error:", error);
+    console.error("❌ SMTP Error:", error);
   } else {
     console.log("✅ SMTP Server is ready");
   }
 });
 
 const sendMail = async (to, subject, html) => {
-  return transporter.sendMail({
-    from: `"Lottery Admin" <${process.env.FROM_EMAIL}>`,
-    to,
-    subject,
-    html,
-  });
+  try {
+    const info = await transporter.sendMail({
+      from: `"Lottery Admin" <${process.env.FROM_EMAIL}>`,
+      to,
+      subject,
+      html,
+    });
+
+    console.log("✅ Email sent:", info.messageId);
+
+    return info;
+  } catch (error) {
+    console.error("❌ Email Send Error:", error);
+    throw error;
+  }
 };
 
 module.exports = sendMail;
