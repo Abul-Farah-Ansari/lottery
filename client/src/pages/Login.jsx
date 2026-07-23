@@ -1,13 +1,16 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import api from "../services/api"; // Change path if needed
 
 function Login() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
-  const navigate = useNavigate();
+
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -16,34 +19,32 @@ function Login() {
     });
   };
 
-const handleLogin = async (e) => {
-  e.preventDefault();
+  const handleLogin = async (e) => {
+    e.preventDefault();
 
-  try {
-    const response = await fetch("http://localhost:5000/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
+    setLoading(true);
 
-    const data = await response.json();
+    try {
+      const { data } = await api.post("/auth/login", formData);
 
-    if (data.success) {
-      localStorage.setItem("token", data.token);
+      if (data.success) {
+        localStorage.setItem("token", data.token);
 
-      alert("Login Successful");
+        alert("Login Successful");
 
-      navigate("/admin");
-    } else {
-      alert(data.message);
+        navigate("/admin");
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error(error);
+
+      alert(error.response?.data?.message || "Server Error");
+    } finally {
+      setLoading(false);
     }
-  } catch (error) {
-    console.error(error);
-    alert("Server Error");
-  }
-};
+  };
+
   return (
     <div
       style={{
@@ -63,7 +64,12 @@ const handleLogin = async (e) => {
           color: "#fff",
         }}
       >
-        <h2 style={{ marginBottom: "20px", color: "#FFD700" }}>
+        <h2
+          style={{
+            marginBottom: "20px",
+            color: "#FFD700",
+          }}
+        >
           Admin Login
         </h2>
 
@@ -73,6 +79,7 @@ const handleLogin = async (e) => {
           placeholder="Username"
           value={formData.username}
           onChange={handleChange}
+          required
           style={{
             width: "100%",
             padding: "12px",
@@ -86,6 +93,7 @@ const handleLogin = async (e) => {
           placeholder="Password"
           value={formData.password}
           onChange={handleChange}
+          required
           style={{
             width: "100%",
             padding: "12px",
@@ -94,6 +102,8 @@ const handleLogin = async (e) => {
         />
 
         <button
+          type="submit"
+          disabled={loading}
           style={{
             width: "100%",
             padding: "12px",
@@ -101,16 +111,21 @@ const handleLogin = async (e) => {
             border: "none",
             cursor: "pointer",
             fontWeight: "bold",
+            marginBottom: "15px",
           }}
         >
-          Login
+          {loading ? "Logging in..." : "Login"}
         </button>
+
         <Link
-    to="/forgot-password"
-    className="text-blue-600 hover:underline"
->
-    Forgot Password?
-</Link>
+          to="/forgot-password"
+          style={{
+            color: "#0d6efd",
+            textDecoration: "none",
+          }}
+        >
+          Forgot Password?
+        </Link>
       </form>
     </div>
   );
