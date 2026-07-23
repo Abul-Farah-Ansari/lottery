@@ -146,14 +146,15 @@ const verifyOtp = async (req, res) => {
       success: true,
       message: "OTP verified successfully.",
     });
-  } catch (error) {
-    console.error(error);
+} catch (error) {
+  console.error("Login Error:", error);
 
-    return res.status(500).json({
-      success: false,
-      message: "Server Error",
-    });
-  }
+  return res.status(500).json({
+    success: false,
+    message: error.message,
+    stack: process.env.NODE_ENV !== "production" ? error.stack : undefined,
+  });
+}
 };
 
 // ===================== RESET PASSWORD =====================
