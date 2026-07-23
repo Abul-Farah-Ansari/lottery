@@ -76,7 +76,6 @@ function HistoryTable() {
 
                 <tr>
                   <th>Draw Time</th>
-                  <th>Winner Name</th>
                   <th>Ticket Number</th>
                 </tr>
 
@@ -87,7 +86,7 @@ function HistoryTable() {
                 {loading ? (
 
                   <tr className="empty-row">
-                    <td colSpan="3">
+                    <td colSpan="2">
 
                       <div className="empty-state">
 
@@ -114,8 +113,6 @@ function HistoryTable() {
 
                       <td>{item.drawTime}</td>
 
-                      <td>{item.winnerName}</td>
-
                       <td>{item.ticketNumber}</td>
 
                     </tr>
@@ -126,7 +123,7 @@ function HistoryTable() {
 
                   <tr className="empty-row">
 
-                    <td colSpan="3">
+                    <td colSpan="2">
 
                       <div className="empty-state">
 
@@ -152,7 +149,7 @@ function HistoryTable() {
 
                   <tr className="empty-row">
 
-                    <td colSpan="3">
+                    <td colSpan="2">
 
                       <div className="empty-state">
 

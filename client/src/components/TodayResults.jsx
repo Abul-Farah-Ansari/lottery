@@ -129,15 +129,11 @@ function TodayResults({
     if (search.trim()) {
       const keyword = search.toLowerCase();
 
-      filtered = filtered.filter(
-        (item) =>
-          item.winnerName
-            ?.toLowerCase()
-            .includes(keyword) ||
-          item.ticketNumber
-            ?.toString()
-            .includes(keyword)
-      );
+      filtered = filtered.filter((item) =>
+  item.ticketNumber
+    ?.toString()
+    .includes(keyword)
+);
     }
 
     // Filter by draw time
@@ -279,7 +275,7 @@ function TodayResults({
           <input
             type="text"
             className="search-input"
-            placeholder="🔍 Search Winner or Ticket Number..."
+            placeholder="🔍 Search Ticket Number..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -340,7 +336,7 @@ function TodayResults({
             <thead>
               <tr>
                 <th>Draw Time</th>
-                <th>Winner Name</th>
+               
                 <th>Ticket Number</th>
                 <th>Date</th>
                 <th>Action</th>
@@ -357,7 +353,7 @@ function TodayResults({
 
                     <td>{result.drawTime}</td>
 
-                    <td>{result.winnerName}</td>
+                   
 
                     <td>{result.ticketNumber}</td>
 
@@ -402,7 +398,7 @@ function TodayResults({
               ) : (
                                 <tr>
                   <td
-                    colSpan="5"
+                    colSpan="4"
                     className="no-data"
                   >
                     No Results Found

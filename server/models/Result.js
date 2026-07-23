@@ -2,12 +2,6 @@ const mongoose = require("mongoose");
 
 const resultSchema = new mongoose.Schema(
   {
-    winnerName: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-
     ticketNumber: {
       type: String,
       required: true,

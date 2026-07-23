@@ -1,4 +1,5 @@
 import "../styles/hero.css";
+
 import LiveResult from "./LiveResult";
 
 import characterImage from "../assets/images/character (1).png";
@@ -54,13 +55,11 @@ function Hero() {
               LIVE RESULT DASHBOARD
             </span>
 
-            <h1>
+            <h2>
               Bombay <span>Jackpot</span>
-            </h1>
+            </h2>
 
-            <p>
-              Live Lottery Result Dashboard
-            </p>
+           
 
           </div>
 

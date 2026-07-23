@@ -6,35 +6,29 @@ const Result = require("../models/Result");
 // ======================================
 const addResult = async (req, res) => {
   try {
-    const { winnerName, ticketNumber, drawDate, drawTime } = req.body;
+   const { ticketNumber, drawDate, drawTime } = req.body;
 
-    // Validation
-    if (!winnerName || !ticketNumber || !drawDate || !drawTime) {
-      return res.status(400).json({
-        success: false,
-        message: "All fields are required.",
-      });
-    }
-
+if (!ticketNumber || !drawDate || !drawTime) {
+  return res.status(400).json({
+    success: false,
+    message: "All fields are required.",
+  });
+}
+if (Number(ticketNumber) < 1 || Number(ticketNumber) > 10) {
+  return res.status(400).json({
+    message: "Ticket number must be between 1 and 10.",
+  });
+}
     // Convert Draw Time (12-hour to 24-hour)
     const [time, period] = drawTime.split(" ");
     let [hours, minutes] = time.split(":").map(Number);
 
-    if (period === "PM" && hours !== 12) {
-      hours += 12;
-    }
-
-    if (period === "AM" && hours === 12) {
-      hours = 0;
-    }
+    if (period === "PM" && hours !== 12) hours += 12;
+    if (period === "AM" && hours === 12) hours = 0;
 
     // Create visibleAt
-    const visibleAt = new Date(drawDate);
-    visibleAt.setHours(hours, minutes, 0, 0);
-    console.log("Draw Date:", drawDate);
-console.log("Draw Time:", drawTime);
-console.log("Visible At:", visibleAt);
-
+const visibleAt = new Date(`${drawDate}T00:00:00`);
+visibleAt.setHours(hours, minutes, 0, 0);
     // Prevent duplicate result
     const existingResult = await Result.findOne({
       drawDate,
@@ -50,7 +44,6 @@ console.log("Visible At:", visibleAt);
 
     // Save Result
     const result = await Result.create({
-      winnerName,
       ticketNumber,
       drawDate,
       drawTime,
@@ -70,7 +63,6 @@ console.log("Visible At:", visibleAt);
     });
   }
 };
-
 // ======================================
 // Live Result API
 // ======================================
@@ -251,7 +243,7 @@ const getTodayResults = async (req, res) => {
 const updateResult = async (req, res) => {
   try {
     const { id } = req.params;
-    const { winnerName, ticketNumber, drawDate, drawTime } = req.body;
+    const { ticketNumber, drawDate, drawTime } = req.body;
 
     // Find current result
     const result = await Result.findById(id);
@@ -278,7 +270,7 @@ const updateResult = async (req, res) => {
     }
 
     // Update fields
-    result.winnerName = winnerName;
+    
     result.ticketNumber = ticketNumber;
     result.drawDate = drawDate;
     result.drawTime = drawTime;
@@ -355,24 +347,27 @@ const deleteResult = async (req, res) => {
 
 const getDashboardStats = async (req, res) => {
   try {
-    const today = new Date().toISOString().split("T")[0];
+const today = new Date().toLocaleDateString("en-CA", {
+  timeZone: "Asia/Kolkata",
+});
 
+const date = req.query.date || today;
     const todayResults = await Result.countDocuments({
       drawDate: today,
     });
 
     const totalResults = await Result.countDocuments();
 
-    const latestWinner = await Result.findOne()
-      .sort({ createdAt: -1 })
-      .select("winnerName ticketNumber drawTime");
+    const latestResult = await Result.findOne()
+      .sort({ visibleAt: -1 })
+      .select("ticketNumber drawTime");
 
     res.json({
-      success: true,
-      todayResults,
-      totalResults,
-      latestWinner,
-    });
+  success: true,
+  todayResults,
+  totalResults,
+  latestResult,
+});
   } catch (error) {
     res.status(500).json({
       success: false,

@@ -1,11 +1,14 @@
 import Countdown from "./Countdown";
 import { useEffect, useState } from "react";
+import Confetti from "react-confetti";
 import api from "../services/api";
 import "../styles/liveResult.css";
+import winnerBadge from "../assets/images/winner-badge.png";
 
 function LiveResult() {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showConfetti, setShowConfetti] = useState(false);
 
   const fetchLiveResult = async () => {
     try {
@@ -13,7 +16,8 @@ function LiveResult() {
       setResult(response.data);
     } catch (error) {
       console.error("Error fetching live result:", error);
-      setResult(null);
+
+      // Keep showing the previous result if API fails
     } finally {
       setLoading(false);
     }
@@ -22,10 +26,29 @@ function LiveResult() {
   useEffect(() => {
     fetchLiveResult();
 
-    const interval = setInterval(fetchLiveResult, 1000);
+    const interval = setInterval(fetchLiveResult, 100);
 
     return () => clearInterval(interval);
   }, []);
+
+  // Confetti every 10 seconds while winner is visible
+  useEffect(() => {
+    if (result?.mode === "winner") {
+      setShowConfetti(true);
+
+      const interval = setInterval(() => {
+        setShowConfetti(false);
+
+        setTimeout(() => {
+          setShowConfetti(true);
+        }, 100);
+      }, 10000);
+
+      return () => clearInterval(interval);
+    } else {
+      setShowConfetti(false);
+    }
+  }, [result]);
 
   // Loading
   if (loading) {
@@ -50,37 +73,50 @@ function LiveResult() {
     );
   }
 
-  // ===========================
-  // WINNER MODE
-  // ===========================
-
+  // Winner Mode
   if (result.mode === "winner") {
     return (
       <section id="live" className="live-result">
 
+        {showConfetti && (
+          <Confetti
+            recycle={false}
+            numberOfPieces={250}
+          />
+        )}
+
+<div className="sparkles">
+  {[...Array(25)].map((_, i) => (
+    <span
+      key={i}
+      className="sparkle"
+      style={{
+        left: `${Math.random() * 100}%`,
+        animationDelay: `${Math.random() * 3}s`,
+      }}
+    >
+      ✨
+    </span>
+  ))}
+</div>
         <div className="result-card">
 
-          <span className="winner-badge">
-            🏆 LIVE WINNER
-          </span>
-
-          <h2 className="winner-heading">
-            Congratulations
-          </h2>
-
           
+         
 
-          <div className="divider"></div>
+          <div className="winner-image-container">
+            <img
+              src={winnerBadge}
+              alt="Winner Badge"
+              className="winner-image"
+            />
 
-          <p className="ticket-label">
-            Winning Ticket Number
-          </p>
-
-          <div className="ticket-number">
-            {result.data.ticketNumber}
+            <div className="ticket-number-overlay">
+              {result.data.ticketNumber}
+            </div>
           </div>
 
-          <div className="divider"></div>
+   
 
           <div className="draw-info">
             Draw Time
@@ -88,24 +124,18 @@ function LiveResult() {
           </div>
 
         </div>
-
       </section>
     );
   }
 
-  // ===========================
-  // COUNTDOWN MODE
-  // ===========================
-
+  // Countdown Mode
   return (
     <section id="live" className="live-result">
-
       <Countdown
         drawTime={result.drawTime}
         visibleAt={result.visibleAt}
         onComplete={fetchLiveResult}
       />
-
     </section>
   );
 }

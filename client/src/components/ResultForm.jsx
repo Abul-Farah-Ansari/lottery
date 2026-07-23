@@ -11,10 +11,13 @@ function ResultForm({
   setSelectedResult,
   setRefresh,
 }) {
+  const today = new Date().toLocaleDateString("en-CA", {
+  timeZone: "Asia/Kolkata",
+});
+
   const [formData, setFormData] = useState({
-    winnerName: "",
     ticketNumber: "",
-    drawDate: "",
+    drawDate: today,
     drawTime: "",
   });
 
@@ -23,61 +26,69 @@ function ResultForm({
   useEffect(() => {
     if (!selectedResult) {
       setFormData({
-        winnerName: "",
         ticketNumber: "",
-        drawDate: "",
+        drawDate: today,
         drawTime: "",
       });
       return;
     }
 
     setFormData({
-      winnerName: selectedResult.winnerName,
       ticketNumber: selectedResult.ticketNumber,
       drawDate: selectedResult.drawDate,
       drawTime: selectedResult.drawTime,
     });
   }, [selectedResult]);
 
- const drawTimes = [
-  "12:00 AM",
-  "01:00 AM",
-  "02:00 AM",
-  "03:00 AM",
-  "04:00 AM",
-  "05:00 AM",
-  "06:00 AM",
-  "07:00 AM",
-  "08:00 AM",
-  "09:00 AM",
-  "10:00 AM",
-  "11:00 AM",
-  "12:00 PM",
-  "01:00 PM",
-  "02:00 PM",
-  "03:00 PM",
-  "04:00 PM",
-  "05:00 PM",
-  "06:00 PM",
-  "07:00 PM",
-  "08:00 PM",
-  "09:00 PM",
-  "10:00 PM",
-  "11:00 PM",
-];
-  const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  const drawTimes = [
+    "12:00 AM",
+    "01:00 AM",
+    "02:00 AM",
+    "03:00 AM",
+    "04:00 AM",
+    "05:00 AM",
+    "06:00 AM",
+    "07:00 AM",
+    "08:00 AM",
+    "09:00 AM",
+    "10:00 AM",
+    "11:00 AM",
+    "12:00 PM",
+    "01:00 PM",
+    "02:00 PM",
+    "03:00 PM",
+    "04:00 PM",
+    "05:00 PM",
+    "06:00 PM",
+    "07:00 PM",
+    "08:00 PM",
+    "09:00 PM",
+    "10:00 PM",
+    "11:00 PM",
+  ];
 
-  // Reset Form
+const handleChange = (e) => {
+  const { name, value } = e.target;
+
+  if (name === "ticketNumber") {
+    if (value === "" || (Number(value) >= 1 && Number(value) <= 99)) {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
+    return;
+  }
+
+  setFormData({
+    ...formData,
+    [name]: value,
+  });
+};
   const resetForm = () => {
     setFormData({
-      winnerName: "",
       ticketNumber: "",
-      drawDate: "",
+      drawDate: today,
       drawTime: "",
     });
 
@@ -86,7 +97,6 @@ function ResultForm({
     setRefresh((prev) => !prev);
   };
 
-  // Save New Result
   const saveResult = async () => {
     try {
       await api.post("/result", formData);
@@ -101,8 +111,8 @@ function ResultForm({
       );
     }
   };
+  
 
-  // Update Existing Result
   const updateResult = async () => {
     try {
       await api.put(
@@ -123,8 +133,7 @@ function ResultForm({
     }
   };
 
-  // Submit Form
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     if (selectedResult) {
@@ -150,23 +159,14 @@ function ResultForm({
         className="result-form"
         onSubmit={handleSubmit}
       >
-        <input
-          type="text"
-          name="winnerName"
-          placeholder="Winner Name"
-          value={formData.winnerName}
-          onChange={handleChange}
-          required
-        />
-
-        <input
-          type="text"
-          name="ticketNumber"
-          placeholder="Ticket Number"
-          value={formData.ticketNumber}
-          onChange={handleChange}
-          required
-        />
+ <input
+  type="number"
+  name="ticketNumber"
+  value={formData.ticketNumber}
+  onChange={handleChange}
+  min="1"
+  max="99"
+/>
 
         <input
           type="date"
@@ -182,9 +182,7 @@ function ResultForm({
           onChange={handleChange}
           required
         >
-          <option value="">
-            Select Draw Time
-          </option>
+          <option value="">Select Draw Time</option>
 
           {drawTimes.map((time) => (
             <option key={time} value={time}>
