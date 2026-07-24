@@ -9,38 +9,38 @@ apiInstance.setApiKey(
 
 const sendMail = async (to, subject, html) => {
   try {
-    const email = new brevo.SendSmtpEmail();
+    const sendSmtpEmail = new brevo.SendSmtpEmail();
 
-    email.sender = {
+    sendSmtpEmail.sender = {
       name: "Lottery Admin",
       email: process.env.FROM_EMAIL,
     };
 
-    email.to = [
+    sendSmtpEmail.to = [
       {
         email: to,
       },
     ];
 
-    email.subject = subject;
-    email.htmlContent = html;
+    sendSmtpEmail.subject = subject;
+    sendSmtpEmail.htmlContent = html;
 
-    const response = await apiInstance.sendTransacEmail(email);
+    const response = await apiInstance.sendTransacEmail(sendSmtpEmail);
 
-    console.log("✅ Email Sent Successfully");
-    console.log(response.body);
+    console.log("✅ Email sent successfully");
+    console.log(response);
 
-    return response.body;
-  } catch (err) {
-    console.error("❌ Brevo Email Error");
+    return response;
+  } catch (error) {
+    console.error("❌ Brevo API Error");
 
-    if (err.response) {
-      console.error(err.response.text);
+    if (error.response) {
+      console.error(error.response.body || error.response.text);
     } else {
-      console.error(err);
+      console.error(error);
     }
 
-    throw err;
+    throw error;
   }
 };
 
