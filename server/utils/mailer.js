@@ -1,46 +1,46 @@
-const nodemailer = require("nodemailer");
+const brevo = require("@getbrevo/brevo");
 
-const transporter = nodemailer.createTransport({
-  host: "smtp-relay.brevo.com",
-  port: 587,
-  secure: false,
-  requireTLS: true,
-  auth: {
-    user: process.env.BREVO_USER,
-    pass: process.env.BREVO_PASS,
-  },
-  connectionTimeout: 60000,
-  greetingTimeout: 60000,
-  socketTimeout: 60000,
-  tls: {
-    rejectUnauthorized: false,
-  },
-});
+const apiInstance = new brevo.TransactionalEmailsApi();
 
-// Verify SMTP connection
-transporter.verify((error, success) => {
-  if (error) {
-    console.error("❌ SMTP Error:", error);
-  } else {
-    console.log("✅ SMTP Server is ready");
-  }
-});
+apiInstance.setApiKey(
+  brevo.TransactionalEmailsApiApiKeys.apiKey,
+  process.env.BREVO_API_KEY
+);
 
 const sendMail = async (to, subject, html) => {
   try {
-    const info = await transporter.sendMail({
-      from: `"Lottery Admin" <${process.env.FROM_EMAIL}>`,
-      to,
-      subject,
-      html,
-    });
+    const email = new brevo.SendSmtpEmail();
 
-    console.log("✅ Email sent:", info.messageId);
+    email.sender = {
+      name: "Lottery Admin",
+      email: process.env.FROM_EMAIL,
+    };
 
-    return info;
-  } catch (error) {
-    console.error("❌ Email Send Error:", error);
-    throw error;
+    email.to = [
+      {
+        email: to,
+      },
+    ];
+
+    email.subject = subject;
+    email.htmlContent = html;
+
+    const response = await apiInstance.sendTransacEmail(email);
+
+    console.log("✅ Email Sent Successfully");
+    console.log(response.body);
+
+    return response.body;
+  } catch (err) {
+    console.error("❌ Brevo Email Error");
+
+    if (err.response) {
+      console.error(err.response.text);
+    } else {
+      console.error(err);
+    }
+
+    throw err;
   }
 };
 
