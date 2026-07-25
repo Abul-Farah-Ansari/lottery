@@ -66,11 +66,7 @@ function HistoryTable() {
                 Winning History
               </h3>
 
-              {results.length > 0 && !loading && (
-                <span>
-                  {results.length} Result{results.length > 1 ? "s" : ""}
-                </span>
-              )}
+             
 
             </div>
 
