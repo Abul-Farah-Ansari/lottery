@@ -114,7 +114,7 @@ if (result.mode === "winner") {
           />
 
           <div className="ticket-number-overlay">
-            {result.data.ticketNumber}
+            {result.data.ticketNumber}X
           </div>
         </div>
 
