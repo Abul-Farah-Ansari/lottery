@@ -262,6 +262,9 @@
 /* ======================================================
    RESPONSIVE
 ====================================================== */
+/* ======================================================
+   RESPONSIVE
+====================================================== */
 
 @media (max-width:992px){
 
@@ -369,26 +372,35 @@
     padding:8px 16px;
   }
 
+  /* ---------- TABLE ---------- */
+
   .table-wrapper{
     width:100%;
-    overflow-x:auto;
-    overflow-y:hidden;
-    -webkit-overflow-scrolling:touch;
+    overflow:hidden;
   }
 
   .history-table{
-    min-width:520px;
-    table-layout:auto;
+    width:100%;
+    min-width:100%;
+    table-layout:fixed;
+  }
+
+  .history-table thead,
+  .history-table tbody tr{
+    width:100%;
+    table-layout:fixed;
   }
 
   .history-table th,
   .history-table td{
+    width:50%;
     padding:14px 10px;
     font-size:14px;
-    white-space:nowrap;
+    text-align:center;
+    white-space:normal;
+    word-break:break-word;
   }
 
-  /* Disable hover on touch devices */
   .history-table tbody tr:hover{
     background:transparent;
   }
@@ -449,13 +461,18 @@
   }
 
   .history-table{
-    min-width:480px;
+    width:100%;
+    min-width:100%;
+    table-layout:fixed;
   }
 
   .history-table th,
   .history-table td{
+    width:50%;
     padding:12px 8px;
     font-size:13px;
+    white-space:normal;
+    word-break:break-word;
   }
 
   .empty-state h3{
@@ -468,7 +485,7 @@
 
 }
 
-/* Hover effect only on desktop */
+/* Desktop Hover Only */
 
 @media (hover:hover){
 
