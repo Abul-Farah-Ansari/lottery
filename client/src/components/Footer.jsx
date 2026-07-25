@@ -6,7 +6,7 @@ function Footer() {
 
       <div className="footer-container">
 
-        {/* Brand */}
+        {/* ================= Brand ================= */}
 
         <div className="footer-column">
 
@@ -15,13 +15,19 @@ function Footer() {
           </h2>
 
           <p>
-            Your trusted destination for live lottery results,
-            countdowns, and previous winning history.
+            Bombay Jackpot is your trusted destination for live lottery
+            results, previous winning history, draw schedules, and real-time
+            result updates. We are committed to providing a fair, transparent,
+            and user-friendly experience.
           </p>
+
+          <div className="footer-badge">
+            18+ | Play Responsibly
+          </div>
 
         </div>
 
-        {/* Links */}
+        {/* ================= Quick Links ================= */}
 
         <div className="footer-column">
 
@@ -33,23 +39,56 @@ function Footer() {
             Previous Results
           </a>
 
-         
+          <a href="#rules">
+            Game Rules
+          </a>
+
+          <a href="#how-to-play">
+            How to Play
+          </a>
+
+          <a href="#stay-updated">
+            Stay Updated
+          </a>
 
         </div>
 
-        {/* Draw Schedule */}
+        {/* ================= Policies ================= */}
 
-       
+        <div className="footer-column">
 
-        {/* Disclaimer */}
+          <h3>Policies</h3>
+
+          <a href="#game-policy">
+            Game Policy
+          </a>
+
+          <a href="#privacy-policy">
+            Privacy Policy
+          </a>
+
+          <a href="#terms">
+            Terms & Conditions
+          </a>
+
+          <a href="#responsible-gaming">
+            Responsible Gaming
+          </a>
+
+        </div>
+
+        {/* ================= Disclaimer ================= */}
 
         <div className="footer-column">
 
           <h3>Disclaimer</h3>
 
           <p>
-            Results displayed on this website are for
-            informational purposes only.
+            Bombay Jackpot is intended for entertainment purposes only.
+            Participation is voluntary and involves financial risk.
+            Please play responsibly and within your financial limits.
+            Users must be 18 years or older and comply with the laws
+            applicable in their jurisdiction.
           </p>
 
         </div>
@@ -58,8 +97,7 @@ function Footer() {
 
       <div className="footer-bottom">
 
-        © {new Date().getFullYear()} Bombay Jackpot.
-        All Rights Reserved.
+        © {new Date().getFullYear()} Bombay Jackpot. All Rights Reserved.
 
       </div>
 

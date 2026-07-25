@@ -22,9 +22,10 @@ function Home() {
     className="mobile-character-img"
   />
 </div>
-<Disclaimer />
+
 
 <HistoryTable />
+<Disclaimer /> 
       <Footer />
       <ScrollToTop />
     </>
