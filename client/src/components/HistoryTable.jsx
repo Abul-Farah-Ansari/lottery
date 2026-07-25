@@ -49,122 +49,137 @@ function HistoryTable() {
         {/* ================= Search ================= */}
 
         <div className="history-search-card">
-
           <DateSearch onSearch={searchResult} />
-
         </div>
 
-        {/* ================= Show Table Only After Search ================= */}
+        {/* ================= Table ================= */}
 
-        {searched && (
+        <div className="history-card">
 
-          <div className="history-card">
+          <div className="table-header">
 
-            <div className="table-header">
+            <h3>
+              Winning History
+            </h3>
 
-              <h3>
-                Winning History
-              </h3>
-
-             
-
-            </div>
-
-            <div className="table-wrapper">
-
-              <table className="history-table">
-
-                <thead>
-
-                  <tr>
-
-                    <th>Draw Time</th>
-
-                    <th>Ticket Number</th>
-
-                  </tr>
-
-                </thead>
-
-                <tbody>
-
-                  {loading ? (
-
-                    <tr className="empty-row">
-
-                      <td colSpan="2">
-
-                        <div className="empty-state">
-
-                          <div className="empty-icon">
-                            ⏳
-                          </div>
-
-                          <h3>
-                            Loading...
-                          </h3>
-
-                          <p>
-                            Fetching lottery results...
-                          </p>
-
-                        </div>
-
-                      </td>
-
-                    </tr>
-
-                  ) : results.length > 0 ? (
-
-                    results.map((item) => (
-
-                      <tr key={item._id}>
-
-                        <td>{item.drawTime}</td>
-
-                        <td>{item.ticketNumber}</td>
-
-                      </tr>
-
-                    ))
-
-                  ) : (
-
-                    <tr className="empty-row">
-
-                      <td colSpan="2">
-
-                        <div className="empty-state">
-
-                          <div className="empty-icon">
-                            🎟️
-                          </div>
-
-                          <h3>
-                            No Results Found
-                          </h3>
-
-                          <p>
-                            No winning result is available for the selected date.
-                          </p>
-
-                        </div>
-
-                      </td>
-
-                    </tr>
-
-                  )}
-
-                </tbody>
-
-              </table>
-
-            </div>
+            <span>
+              {results.length} Result{results.length !== 1 ? "s" : ""}
+            </span>
 
           </div>
 
-        )}
+          <div className="table-wrapper">
+
+            <table className="history-table">
+
+              <thead>
+
+                <tr>
+                  <th>Draw Time</th>
+                  <th>Ticket Number</th>
+                </tr>
+
+              </thead>
+
+              <tbody>
+
+                {loading ? (
+
+                  <tr className="empty-row">
+                    <td colSpan="2">
+
+                      <div className="empty-state">
+
+                        <div className="empty-icon">
+                          ⏳
+                        </div>
+
+                        <h3>Loading...</h3>
+
+                        <p>
+                          Fetching lottery results...
+                        </p>
+
+                      </div>
+
+                    </td>
+                  </tr>
+
+                ) : results.length > 0 ? (
+
+                  results.map((item) => (
+
+                    <tr key={item._id}>
+
+                      <td>{item.drawTime}</td>
+
+                      <td>{item.ticketNumber}</td>
+
+                    </tr>
+
+                  ))
+
+                ) : searched ? (
+
+                  <tr className="empty-row">
+
+                    <td colSpan="2">
+
+                      <div className="empty-state">
+
+                        <div className="empty-icon">
+                          🎟️
+                        </div>
+
+                        <h3>
+                          No Results Found
+                        </h3>
+
+                        <p>
+                          No winning result is available for the selected date.
+                        </p>
+
+                      </div>
+
+                    </td>
+
+                  </tr>
+
+                ) : (
+
+                  <tr className="empty-row">
+
+                    <td colSpan="2">
+
+                      <div className="empty-state">
+
+                        <div className="empty-icon">
+                          📅
+                        </div>
+
+                        <h3>
+                          Select a Date
+                        </h3>
+
+                        <p>
+                          Choose a date above and click Search Results.
+                        </p>
+
+                      </div>
+
+                    </td>
+
+                  </tr>
+
+                )}
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
 
       </div>
     </section>
