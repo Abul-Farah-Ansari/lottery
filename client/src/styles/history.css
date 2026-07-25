@@ -2,538 +2,294 @@
    HISTORY SECTION
 ====================================================== */
 
-.history-section{
-  padding:90px 20px;
-  background:#000;
-  overflow-x:hidden;
+.history-section {
+  padding: 90px 20px;
+  background: #000;
 }
 
-.history-container{
-  max-width:1300px;
-  margin:auto;
-  width:100%;
-  overflow-x:hidden;
+.history-container {
+  max-width: 1300px;
+  margin: auto;
 }
 
 /* ======================================================
    HEADING
 ====================================================== */
 
-.history-heading{
-  text-align:center;
-  margin-bottom:40px;
+.history-heading {
+  text-align: center;
+  margin-bottom: 40px;
 }
 
-.history-tag{
-  display:inline-block;
-  padding:8px 20px;
-  border-radius:30px;
-  background:#000;
-  color:#f7b500;
-  font-size:14px;
-  font-weight:700;
-  letter-spacing:1px;
+.history-tag {
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 30px;
+  background: rgba(247,181,0,.12);
+  color: #f7b500;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
-.history-heading h2{
-  margin:18px 0 12px;
-  font-size:44px;
-  color:#fff;
-  font-weight:700;
+.history-heading h2 {
+  margin: 18px 0 12px;
+  font-size: 44px;
+  color: white;
+  font-weight: 700;
 }
 
-.history-heading p{
-  color:#b7b7b7;
-  font-size:17px;
-  max-width:620px;
-  margin:auto;
-  line-height:1.7;
+.history-heading p {
+  color: #b7b7b7;
+  font-size: 17px;
+  max-width: 620px;
+  margin: auto;
+  line-height: 1.7;
 }
 
 /* ======================================================
    SEARCH CARD
 ====================================================== */
 
-.history-search-card{
-  width:100%;
-  max-width:750px;
-  margin:0 auto 35px;
-  padding:28px;
-  border-radius:24px;
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.08);
-  backdrop-filter:blur(20px);
+.history-search-card {
+  width: 100%;
+  max-width: 750px;
+  margin: auto;
+  margin-bottom: 35px;
+  padding: 28px;
+  border-radius: 24px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.08);
+  backdrop-filter: blur(20px);
 }
 
-.history-search{
-  display:flex;
-  gap:20px;
-  align-items:flex-end;
+.history-search {
+  display: flex;
+  gap: 20px;
+  align-items: end;
 }
 
-.date-field{
-  flex:1;
+.date-field {
+  flex: 1;
 }
 
-.date-field label{
-  display:block;
-  color:#fff;
-  font-size:15px;
-  margin-bottom:12px;
-  font-weight:600;
+.date-field label {
+  display: block;
+  color: white;
+  font-size: 15px;
+  margin-bottom: 12px;
+  font-weight: 600;
 }
 
-.date-field input{
-  width:100%;
-  height:56px;
-  padding:0 18px;
-  border-radius:14px;
-  border:1px solid rgba(255,255,255,.08);
-  background:rgba(255,255,255,.04);
-  color:#fff;
-  font-size:16px;
-  outline:none;
-  transition:.3s;
+.date-field input {
+  width: 100%;
+  height: 56px;
+  padding: 0 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.04);
+  color: white;
+  font-size: 16px;
+  outline: none;
+  transition: .3s;
 }
 
-.date-field input:focus{
-  border-color:#f7b500;
-  box-shadow:0 0 0 4px rgba(247,181,0,.12);
+.date-field input:focus {
+  border-color: #f7b500;
+  box-shadow: 0 0 0 4px rgba(247,181,0,.12);
 }
 
-.search-btn{
-  height:56px;
-  padding:0 30px;
-  border:none;
-  border-radius:14px;
-  background:#f7b500;
-  color:#111;
-  font-weight:700;
-  cursor:pointer;
-  transition:.3s;
+.search-btn {
+  height: 56px;
+  padding: 0 30px;
+  border: none;
+  border-radius: 14px;
+  background: #f7b500;
+  color: #111;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .3s;
 }
 
-.search-btn:hover{
-  background:#ffd447;
-  transform:translateY(-2px);
+.search-btn:hover {
+  background: #ffd447;
+  transform: translateY(-2px);
 }
 
 /* ======================================================
    HISTORY CARD
 ====================================================== */
 
-.history-card{
-  width:100%;
-  max-width:100%;
-  border-radius:24px;
-  background:#000;
-  border:1px solid rgba(255,255,255,.08);
-  backdrop-filter:blur(20px);
-  overflow:hidden;
+.history-card {
+  border-radius: 24px;
+  background: #000;
+  border: 1px solid rgba(255,255,255,.08);
+  backdrop-filter: blur(20px);
+  overflow: hidden;
 }
 
-.table-header{
-  padding:22px 30px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-bottom:1px solid rgba(255,255,255,.08);
+.table-header {
+  padding: 22px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,.08);
 }
 
-.table-header h3{
-  color:#fff;
-  font-size:22px;
+.table-header h3 {
+  color: white;
+  font-size: 22px;
 }
 
-.table-header span{
-  background:rgba(247,181,0,.12);
-  color:#f7b500;
-  padding:8px 16px;
-  border-radius:30px;
-  font-weight:600;
+.table-header span {
+  background: rgba(247,181,0,.12);
+  color: #f7b500;
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-weight: 600;
 }
 
-/* ======================================================
-   TABLE WRAPPER
-====================================================== */
-/* ======================================================
-   TABLE WRAPPER
-====================================================== */
-
-.table-wrapper{
-  width:100%;
-  max-width:100%;
-  max-height:470px;
-  overflow-y:auto;
-  overflow-x:hidden;
-  background:#000;
-}
-
-.table-wrapper::-webkit-scrollbar{
-  width:8px;
-}
-
-.table-wrapper::-webkit-scrollbar-track{
-  background:#111;
-}
-
-.table-wrapper::-webkit-scrollbar-thumb{
-  background:#f7b500;
-  border-radius:20px;
-}
 /* ======================================================
    TABLE
 ====================================================== */
 
-.history-table{
-  width:100%;
-  max-width:100%;
-  border-collapse:collapse;
-  table-layout:fixed;
+.table-wrapper {
+  height: 470px;
+  overflow: hidden;
 }
 
-.history-table th,
-.history-table td{
-  width:50%;
-  padding:18px 12px;
-  text-align:center;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
 }
 
-.history-table th{
-  color:#111;
-  font-size:17px;
-  font-weight:700;
+.history-table thead,
+.history-table tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
 }
 
-.history-table td{
-  color:#fff;
-  font-size:16px;
-  border-bottom:1px solid rgba(255,255,255,.05);
+.history-table thead {
+  background: #f7b500;
 }
 
-.history-table tbody tr{
-  transition:background .25s ease;
+.history-table tbody {
+  display: block;
+  height: 405px;
+  overflow-y: auto;
 }
 
-@media (hover:hover){
+.history-table tbody::-webkit-scrollbar {
+  width: 8px;
+}
 
-  .history-table tbody tr:hover{
-    background:rgba(247,181,0,.08);
-  }
+.history-table tbody::-webkit-scrollbar-thumb {
+  background: #f7b500;
+  border-radius: 20px;
+}
 
+.history-table tbody::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.history-table th {
+  padding: 18px;
+  color: #111;
+  font-size: 17px;
+}
+
+.history-table td {
+  padding: 18px;
+  color: white;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+}
+
+.history-table tbody tr {
+  transition: .25s;
+}
+
+.history-table tbody tr:hover {
+  background: rgba(255,255,255,.05);
 }
 
 /* ======================================================
    EMPTY STATE
 ====================================================== */
 
-.empty-row td{
-  height:405px;
-  padding:0;
+.empty-row td {
+  height: 405px;
 }
 
-.empty-state{
-  height:100%;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  color:#fff;
-  padding:20px;
+.empty-state {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
 }
 
-.empty-icon{
-  font-size:60px;
-  margin-bottom:15px;
-  color:#f7b500;
+.empty-icon {
+  font-size: 60px;
+  margin-bottom: 15px;
 }
 
-.empty-state h3{
-  font-size:30px;
-  margin-bottom:10px;
+.empty-state h3 {
+  font-size: 30px;
+  margin-bottom: 10px;
 }
 
-.empty-state p{
-  max-width:420px;
-  color:#b7b7b7;
-  font-size:16px;
-  line-height:1.6;
-}
-/* ======================================================
-   RESPONSIVE - TABLET
-====================================================== */
-
-@media (max-width:992px){
-
-  .history-section{
-    padding:70px 20px;
-  }
-
-  .history-heading h2{
-    font-size:36px;
-  }
-
-  .history-search{
-    flex-direction:column;
-    gap:18px;
-  }
-
-  .history-search-card{
-    padding:24px;
-  }
-
-  .date-field,
-  .date-field input{
-    width:100%;
-  }
-
-  .search-btn{
-    width:100%;
-    height:54px;
-  }
-
-  .table-header{
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    gap:14px;
-  }
-
+.empty-state p {
+  color: #b7b7b7;
+  font-size: 16px;
+  max-width: 420px;
+  line-height: 1.6;
 }
 
 /* ======================================================
-   RESPONSIVE - MOBILE
+   RESPONSIVE
 ====================================================== */
 
-@media (max-width:768px){
+@media (max-width: 992px) {
 
-  .history-section{
-    padding:60px 16px;
+  .history-search {
+    flex-direction: column;
   }
 
-  .history-heading{
-    margin-bottom:28px;
+  .search-btn {
+    width: 100%;
   }
 
-  .history-heading h2{
-    font-size:28px;
-    line-height:1.2;
+  .history-heading h2 {
+    font-size: 36px;
   }
 
-  .history-heading p{
-    font-size:15px;
-    line-height:1.7;
-  }
-
-  .history-search-card{
-    padding:18px;
-    border-radius:18px;
-    margin-bottom:22px;
-  }
-
-  .history-search{
-    gap:16px;
-  }
-
-  .date-field label{
-    text-align:center;
-    font-size:15px;
-  }
-
-  .date-field input{
-    height:52px;
-    font-size:15px;
-  }
-
-  .search-btn{
-    width:100%;
-    height:52px;
-    font-size:15px;
-  }
-
-  .history-card{
-    border-radius:18px;
-  }
-
-  .table-header{
-    padding:18px;
-  }
-
-  .table-header h3{
-    font-size:18px;
-  }
-
-  .table-header span{
-    font-size:14px;
-    padding:8px 14px;
-  }
-
-  /* ===== TABLE ===== */
-
-  .table-wrapper{
-    width:100%;
-    overflow-x:hidden;
-    overflow-y:hidden;
-  }
-
-  .history-table{
-    width:100%;
-    min-width:100%;
-    table-layout:fixed;
-  }
-
-  .history-table thead,
-  .history-table tbody tr{
-    width:100%;
-    table-layout:fixed;
-  }
-
-  .history-table th,
-  .history-table td{
-    width:50%;
-    padding:14px 6px;
-    font-size:14px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-  }
-
-  .history-table tbody{
-    overflow-x:hidden;
-  }
-
-  .history-table tbody tr:hover{
-    background:transparent;
-  }
-
-  .empty-icon{
-    font-size:46px;
-  }
-
-  .empty-state h3{
-    font-size:24px;
-  }
-
-  .empty-state p{
-    font-size:14px;
-    padding:0 15px;
+  .table-header {
+    flex-direction: column;
+    gap: 15px;
   }
 
 }
 
-/* ======================================================
-   SMALL MOBILE
-====================================================== */
+@media (max-width: 768px) {
 
-@media (max-width:480px){
-
-  .history-section{
-    padding:50px 12px;
+  .history-table {
+    min-width: 720px;
   }
 
-  .history-heading h2{
-    font-size:24px;
+  .table-wrapper {
+    overflow-x: auto;
   }
 
-  .history-heading p{
-    font-size:14px;
+  .history-heading h2 {
+    font-size: 30px;
   }
 
-  .history-search-card{
-    padding:16px;
+  .history-heading p {
+    font-size: 15px;
   }
 
-  .date-field input{
-    height:50px;
-    font-size:14px;
-  }
-
-  .search-btn{
-    height:50px;
-    font-size:14px;
-  }
-
-  .table-header{
-    padding:16px 12px;
-  }
-
-  .table-header h3{
-    font-size:17px;
-  }
-
-  .table-header span{
-    font-size:13px;
-    padding:7px 12px;
-  }
-
-  .history-table{
-    width:100%;
-    min-width:100%;
-    table-layout:fixed;
-  }
-
-  .history-table th,
-  .history-table td{
-    width:50%;
-    padding:12px 4px;
-    font-size:13px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-  }
-
-  .history-table tbody{
-    overflow-x:hidden;
-  }
-
-  .empty-state h3{
-    font-size:20px;
-  }
-
-  .empty-state p{
-    font-size:13px;
-  }
-
-}
-
-/* ======================================================
-   DESKTOP HOVER ONLY
-====================================================== */
-
-@media (hover:hover){
-
-  .history-table tbody tr{
-    transition:background .25s ease;
-  }
-
-  .history-table tbody tr:hover{
-    background:rgba(247,181,0,.08);
-  }
-
-}
-
-/* ======================================================
-   PREVENT HORIZONTAL SCROLL
-====================================================== */
-
-html,
-body{
-  overflow-x:hidden;
-}
-
-.history-section,
-.history-container,
-.history-card,
-.table-wrapper,
-.history-table{
-  max-width:100%;
-}
-
-*{
-  box-sizing:border-box;
 }
