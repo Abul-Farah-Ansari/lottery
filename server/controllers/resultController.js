@@ -27,8 +27,13 @@ if (Number(ticketNumber) < 1 || Number(ticketNumber) > 10) {
     if (period === "AM" && hours === 12) hours = 0;
 
     // Create visibleAt
-const visibleAt = new Date(`${drawDate}T00:00:00`);
-visibleAt.setHours(hours, minutes, 0, 0);
+// Create visibleAt in IST and store as UTC
+const [year, month, day] = drawDate.split("-").map(Number);
+
+// IST is UTC+5:30
+const visibleAt = new Date(
+  Date.UTC(year, month - 1, day, hours - 5, minutes - 30, 0, 0)
+);
     // Prevent duplicate result
     const existingResult = await Result.findOne({
       drawDate,
@@ -305,16 +310,14 @@ const updateResult = async (req, res) => {
       hours = 0;
     }
 
-    const visibleAt = new Date(drawDate);
-    visibleAt.setHours(hours, minutes, 0, 0);
-    console.log("=================================");
-console.log("Draw Date:", drawDate);
-console.log("Draw Time:", drawTime);
-console.log("Visible At:", visibleAt);
-console.log("Visible ISO:", visibleAt.toISOString());
-console.log("=================================");
+    // Create visibleAt in IST and store as UTC
+const [year, month, day] = drawDate.split("-").map(Number);
 
-    result.visibleAt = visibleAt;
+const visibleAt = new Date(
+  Date.UTC(year, month - 1, day, hours - 5, minutes - 30, 0, 0)
+);
+
+result.visibleAt = visibleAt;
 
     await result.save();
 
