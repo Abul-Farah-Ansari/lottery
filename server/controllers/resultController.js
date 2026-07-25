@@ -72,6 +72,24 @@ const getLiveResult = async (req, res) => {
     console.log("=================================");
 console.log("Current Server Time:", now);
 console.log("Current ISO Time:", now.toISOString());
+
+const allResults = await Result.find().sort({ visibleAt: 1 });
+
+console.log("All Results:");
+
+allResults.forEach((r) => {
+  console.log({
+    ticketNumber: r.ticketNumber,
+    drawDate: r.drawDate,
+    drawTime: r.drawTime,
+    visibleAt: r.visibleAt,
+  });
+});
+
+console.log("=================================");
+    console.log("=================================");
+console.log("Current Server Time:", now);
+console.log("Current ISO Time:", now.toISOString());
 console.log("=================================");
 
     // Next upcoming result
