@@ -33,9 +33,7 @@ function Footer() {
             Previous Results
           </a>
 
-          <a href="/admin">
-            Admin Panel
-          </a>
+         
 
         </div>
 
