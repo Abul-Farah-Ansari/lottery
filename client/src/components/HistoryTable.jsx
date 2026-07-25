@@ -1,6 +1,6 @@
 import { useState } from "react";
 import api from "../services/api";
-import "./history.css";
+import "../styles/history.css";
 
 export default function HistoryTable() {
   const [date, setDate] = useState("");
