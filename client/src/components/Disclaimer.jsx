@@ -29,10 +29,12 @@ function Disclaimer() {
 
           <div className="rule-card">
             <FaTicketAlt className="rule-icon" />
-            <h3>Maximum 10 Participants</h3>
+            <h3>Unlimited Participation</h3>
             <p>
-              Every lucky draw is limited to only 10 participants,
-              giving every player an equal opportunity to become the winner.
+              Every lucky draw is open to all eligible participants. 
+              Each valid ticket entered into the draw has an equal opportunity 
+              to be selected as the winning ticket through a fair and transparent 
+              random selection process.
             </p>
           </div>
 

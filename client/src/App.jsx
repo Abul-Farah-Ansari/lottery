@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
@@ -7,14 +8,28 @@ import ForgotPassword from "./pages/ForgotPassword";
 import VerifyOtp from "./pages/VerifyOtp";
 import ResetPassword from "./pages/ResetPassword";
 
-
-
+import Loader from "./components/Loader";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1500); // Loader duration (1.5 seconds)
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
     <BrowserRouter>
       <Routes>
+        {/* Public Routes */}
         <Route path="/" element={<Home />} />
 
         <Route path="/login" element={<Login />} />
@@ -22,6 +37,7 @@ function App() {
         <Route path="/verify-otp" element={<VerifyOtp />} />
         <Route path="/reset-password" element={<ResetPassword />} />
 
+        {/* Protected Route */}
         <Route
           path="/admin"
           element={
