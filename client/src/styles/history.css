@@ -153,59 +153,39 @@
    TABLE
 ====================================================== */
 
-.table-wrapper {
-  height: 470px;
-  overflow: hidden;
+.table-wrapper{
+  width:100%;
+  overflow-x:hidden;
 }
 
-.history-table {
-  width: 100%;
-  border-collapse: collapse;
-  table-layout: fixed;
+.history-table{
+  width:100%;
+  table-layout:fixed;
 }
 
 .history-table thead,
-.history-table tbody tr {
-  display: table;
-  width: 100%;
-  table-layout: fixed;
+.history-table tbody tr{
+  width:100%;
+  table-layout:fixed;
 }
 
-.history-table thead {
-  background: #f7b500;
+.history-table th,
+.history-table td{
+  width:50%;
+  padding:14px 6px;
+  font-size:14px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.history-table th{
+  color:#111;
+  font-size:17px;
 }
 
-.history-table tbody {
-  display: block;
-  height: 405px;
-  overflow-y: auto;
-  background-color: #000;
-}
-
-.history-table tbody::-webkit-scrollbar {
-  width: 8px;
-}
-
-.history-table tbody::-webkit-scrollbar-thumb {
-  background: #f7b500;
-  border-radius: 20px;
-}
-
-.history-table tbody::-webkit-scrollbar-track {
-  background: #000;
-}
-
-.history-table th {
-  padding: 18px;
-  color: #111;
-  font-size: 17px;
-}
-
-.history-table td {
-  padding: 18px;
-  color: white;
-  text-align: center;
-  border-bottom: 1px solid rgba(255,255,255,.05);
+.history-table td{
+  color:#fff;
+  border-bottom:1px solid rgba(255,255,255,.05);
 }
 
 .history-table tbody tr{
@@ -378,28 +358,20 @@
     width:100%;
     overflow:hidden;
   }
+.history-table{
+  width:100%;
+  table-layout:fixed;
+}
 
-  .history-table{
-    width:100%;
-    min-width:100%;
-    table-layout:fixed;
-  }
-
-  .history-table thead,
-  .history-table tbody tr{
-    width:100%;
-    table-layout:fixed;
-  }
-
-  .history-table th,
-  .history-table td{
-    width:50%;
-    padding:14px 10px;
-    font-size:14px;
-    text-align:center;
-    white-space:normal;
-    word-break:break-word;
-  }
+.history-table th,
+.history-table td{
+  width:50%;
+  padding:12px 5px;
+  font-size:13px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
 
   .history-table tbody tr:hover{
     background:transparent;
@@ -497,4 +469,16 @@
     background:rgba(247,181,0,.08);
   }
 
+}
+html,
+body{
+  overflow-x:hidden;
+}
+
+.history-section,
+.history-container,
+.history-card,
+.table-wrapper{
+  max-width:100%;
+  overflow-x:hidden;
 }
