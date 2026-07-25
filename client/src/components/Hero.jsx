@@ -55,9 +55,9 @@ function Hero() {
               LIVE RESULT DASHBOARD
             </span>
 
-            <h2>
-              Bombay <span>Jackpot</span>
-            </h2>
+          <h2 className="hero-heading">
+  Bombay <span>Jackpot</span>
+</h2>
 
            
 

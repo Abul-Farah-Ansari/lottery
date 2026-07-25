@@ -32,9 +32,11 @@ function Navbar() {
         </a>
 
         <div className={`nav-links ${menuOpen ? "active" : ""}`}>
-          <a href="/" onClick={closeMenu}>Home</a>
-          <a href="#history" onClick={closeMenu}>History</a>
-        </div>
+  <a href="/" onClick={closeMenu}>Home</a>
+    <a href="#rules" onClick={closeMenu}>Rules</a>
+  <a href="#history" onClick={closeMenu}>History</a>
+
+</div>
 
         <button
           className={`hamburger ${menuOpen ? "active" : ""}`}

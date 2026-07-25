@@ -74,59 +74,59 @@ function LiveResult() {
   }
 
   // Winner Mode
-  if (result.mode === "winner") {
-    return (
-      <section id="live" className="live-result">
+  // Winner Mode
+if (result.mode === "winner") {
+  return (
+    <section id="live" className="live-result">
 
-        {showConfetti && (
-          <Confetti
-            recycle={false}
-            numberOfPieces={250}
+      {showConfetti && (
+        <Confetti
+          recycle={false}
+          numberOfPieces={250}
+        />
+      )}
+
+      <div className="sparkles">
+        {[...Array(25)].map((_, i) => (
+          <span
+            key={i}
+            className="sparkle"
+            style={{
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+            }}
+          >
+            ✨
+          </span>
+        ))}
+      </div>
+
+      <div className="result-card">
+
+        {/* Animated Border Rays */}
+        <div className="border-rays"></div>
+
+        <div className="winner-image-container">
+          <img
+            src={winnerBadge}
+            alt="Winner Badge"
+            className="winner-image"
           />
-        )}
 
-<div className="sparkles">
-  {[...Array(25)].map((_, i) => (
-    <span
-      key={i}
-      className="sparkle"
-      style={{
-        left: `${Math.random() * 100}%`,
-        animationDelay: `${Math.random() * 3}s`,
-      }}
-    >
-      ✨
-    </span>
-  ))}
-</div>
-        <div className="result-card">
-
-          
-         
-
-          <div className="winner-image-container">
-            <img
-              src={winnerBadge}
-              alt="Winner Badge"
-              className="winner-image"
-            />
-
-            <div className="ticket-number-overlay">
-              {result.data.ticketNumber}
-            </div>
+          <div className="ticket-number-overlay">
+            {result.data.ticketNumber}
           </div>
-
-   
-
-          <div className="draw-info">
-            Draw Time
-            <strong>{result.data.drawTime}</strong>
-          </div>
-
         </div>
-      </section>
-    );
-  }
+
+        <div className="draw-info">
+          Draw Time
+          <strong>{result.data.drawTime}</strong>
+        </div>
+
+      </div>
+    </section>
+  );
+}
 
   // Countdown Mode
   return (

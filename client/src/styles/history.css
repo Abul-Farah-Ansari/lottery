@@ -25,7 +25,7 @@
   display: inline-block;
   padding: 8px 20px;
   border-radius: 30px;
-  background: rgba(247,181,0,.12);
+  background: #000;
   color: #f7b500;
   font-size: 14px;
   font-weight: 700;
@@ -122,7 +122,7 @@
 
 .history-card {
   border-radius: 24px;
-  background: rgba(255,255,255,.05);
+  background: #000;
   border: 1px solid rgba(255,255,255,.08);
   backdrop-filter: blur(20px);
   overflow: hidden;
@@ -179,6 +179,7 @@
   display: block;
   height: 405px;
   overflow-y: auto;
+  background-color: #000;
 }
 
 .history-table tbody::-webkit-scrollbar {
@@ -191,7 +192,7 @@
 }
 
 .history-table tbody::-webkit-scrollbar-track {
-  background: transparent;
+  background: #000;
 }
 
 .history-table th {

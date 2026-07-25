@@ -50,7 +50,7 @@ function Countdown({ drawTime, visibleAt, onComplete }) {
 
   return (
     <div className="countdown-card">
-
+<div className="border-rays"></div>
       <span className="countdown-badge">
         ⏳ NEXT DRAW
       </span>

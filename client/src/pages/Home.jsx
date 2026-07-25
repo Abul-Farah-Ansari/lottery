@@ -4,11 +4,14 @@ import HistoryTable from "../components/HistoryTable";
 import Footer from "../components/Footer";
 import ScrollToTop from "../components/ScrollTop";
 import characterImage from "../assets/images/character (1).png"
+import Disclaimer from "../components/Disclaimer";
+
 
 
 function Home() {
   return (
     <>
+    
       <Navbar />
      <Hero />
 
@@ -19,6 +22,7 @@ function Home() {
     className="mobile-character-img"
   />
 </div>
+<Disclaimer />
 
 <HistoryTable />
       <Footer />

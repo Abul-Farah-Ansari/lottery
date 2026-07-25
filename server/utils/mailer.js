@@ -1,45 +1,33 @@
-const brevo = require("@getbrevo/brevo");
+const { BrevoClient } = require("@getbrevo/brevo");
+console.log("MAILER BREVO_API_KEY:", process.env.BREVO_API_KEY);
 
-const apiInstance = new brevo.TransactionalEmailsApi();
-
-apiInstance.setApiKey(
-  brevo.TransactionalEmailsApiApiKeys.apiKey,
-  process.env.BREVO_API_KEY
-);
+const brevo = new BrevoClient({
+  apiKey: process.env.BREVO_API_KEY,
+});
 
 const sendMail = async (to, subject, html) => {
   try {
-    const sendSmtpEmail = new brevo.SendSmtpEmail();
-
-    sendSmtpEmail.sender = {
-      name: "Lottery Admin",
-      email: process.env.FROM_EMAIL,
-    };
-
-    sendSmtpEmail.to = [
-      {
-        email: to,
+    const response = await brevo.transactionalEmails.sendTransacEmail({
+      sender: {
+        name: "Lottery Admin",
+        email: process.env.FROM_EMAIL,
       },
-    ];
-
-    sendSmtpEmail.subject = subject;
-    sendSmtpEmail.htmlContent = html;
-
-    const response = await apiInstance.sendTransacEmail(sendSmtpEmail);
+      to: [
+        {
+          email: to,
+        },
+      ],
+      subject,
+      htmlContent: html,
+    });
 
     console.log("✅ Email sent successfully");
     console.log(response);
 
     return response;
   } catch (error) {
-    console.error("❌ Brevo API Error");
-
-    if (error.response) {
-      console.error(error.response.body || error.response.text);
-    } else {
-      console.error(error);
-    }
-
+    console.error("❌ Brevo API Error:");
+    console.error(error);
     throw error;
   }
 };
