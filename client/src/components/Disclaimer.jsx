@@ -28,15 +28,14 @@ function Disclaimer() {
         <div className="rules-grid">
 
           <div className="rule-card">
-            <FaTicketAlt className="rule-icon" />
-            <h3>Unlimited Participation</h3>
-            <p>
-              Every lucky draw is open to all eligible participants. 
-              Each valid ticket entered into the draw has an equal opportunity 
-              to be selected as the winning ticket through a fair and transparent 
-              random selection process.
-            </p>
-          </div>
+  <FaTicketAlt className="rule-icon" />
+  <h3>Unlimited Participation</h3>
+  <p>
+    The lucky draw is open to all eligible participants. Every valid ticket
+    entered into the draw has an equal opportunity to be selected as the
+    winning ticket.
+  </p>
+</div>
 
           <div className="rule-card">
             <FaGift className="rule-icon" />
@@ -70,11 +69,12 @@ function Disclaimer() {
         <div className="rules-content">
 
           <p>
-            Bombay Jackpot is a participation-based lucky draw game created
-            for entertainment purposes. Each draw consists of a maximum of
-            <strong> 10 participants</strong>, ensuring every participant
-            has an equal chance of winning.
-          </p>
+  Bombay Jackpot is a participation-based lucky draw game created
+  for entertainment purposes. Every valid ticket entered into a draw
+  is eligible to participate, and winners are selected through a fair,
+  random, and transparent process, ensuring equal opportunity for all
+  eligible participants.
+</p>
 
           <p>
             After the countdown ends, one valid ticket number is randomly

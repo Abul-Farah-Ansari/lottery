@@ -39,17 +39,7 @@ function Footer() {
 
         {/* Draw Schedule */}
 
-        <div className="footer-column">
-
-          <h3>Draw Schedule</h3>
-
-          <p>🕑 2:00 PM</p>
-
-          <p>🕔 5:00 PM</p>
-
-          <p>🕗 8:00 PM</p>
-
-        </div>
+       
 
         {/* Disclaimer */}
 
