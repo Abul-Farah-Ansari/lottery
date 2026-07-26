@@ -583,16 +583,27 @@ html{
 .mobile-cards{
     display:block;
 }
+.hero{
+    position:relative;
+}
 
 .mobile-card{
-    position:fixed;
-    top:82px;
+    position:absolute;
+    top:20px;
     width:75px;
     z-index:0;
     pointer-events:none;
     opacity:.95;
     animation:cardFloat 3s ease-in-out infinite;
     filter:drop-shadow(0 0 12px rgba(255,215,0,.6));
+}
+
+.mobile-card.left{
+    left:15px;
+}
+
+.mobile-card.right{
+    right:15px;
 }
 
 .mobile-card.left{
