@@ -5,6 +5,8 @@ import LiveResult from "./LiveResult";
 import characterImage from "../assets/images/character (1).png";
 import prizeImage from "../assets/images/prize.png";
 
+import leftCard from "../assets/images/navimage.png";
+import rightCard from "../assets/images/navimage.png";
 
 function Hero() {
   
@@ -12,6 +14,21 @@ function Hero() {
   return (
     <section className="hero">
       <div className="hero-container">
+        <div className="mobile-cards">
+
+  <img
+    src={leftCard}
+    alt="Left Card"
+    className="mobile-card left"
+  />
+
+  <img
+    src={rightCard}
+    alt="Right Card"
+    className="mobile-card right"
+  />
+
+</div>
 
         {/* ================= LEFT ================= */}
 

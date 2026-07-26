@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import "../styles/navbar.css";
 
+
+
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -12,43 +14,79 @@ function Navbar() {
       setScrolled(window.scrollY > 20);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setMenuOpen(false);
+      }
+    };
 
-    return () =>
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
+
+    return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   return (
-    <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
-      <div className="nav-container">
+    <>
+      <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
 
-        <a href="/" className="logo" onClick={closeMenu}>
-          <span className="logo-icon">🎰</span>
+        {/* Left Card */}
+      
+        <div className="nav-container">
 
-          <div className="logo-text">
-            <h2>Bombay Jackpot</h2>
-            <p>Live Lottery Results</p>
+          {/* Logo */}
+          <a href="/" className="logo" onClick={closeMenu}>
+            <span className="logo-icon">🎰</span>
+
+            <div className="logo-text">
+              <h2>Bombay Jackpot</h2>
+              <p>Live Lottery Results</p>
+            </div>
+          </a>
+
+          {/* Navigation */}
+          <div className={`nav-links ${menuOpen ? "active" : ""}`}>
+            <a href="/" onClick={closeMenu}>
+              Home
+            </a>
+
+            <a href="#rules" onClick={closeMenu}>
+              Rules
+            </a>
+
+            <a href="#history" onClick={closeMenu}>
+              History
+            </a>
           </div>
-        </a>
 
-        <div className={`nav-links ${menuOpen ? "active" : ""}`}>
-  <a href="/" onClick={closeMenu}>Home</a>
-    <a href="#rules" onClick={closeMenu}>Rules</a>
-  <a href="#history" onClick={closeMenu}>History</a>
+          {/* Hamburger */}
+          <button
+            className={`hamburger ${menuOpen ? "active" : ""}`}
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle Menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
 
-</div>
+        </div>
 
-        <button
-          className={`hamburger ${menuOpen ? "active" : ""}`}
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+        {/* Right Card */}
+       
+      </nav>
 
-      </div>
-    </nav>
+      {/* Mobile Overlay */}
+      {menuOpen && (
+        <div
+          className="menu-overlay"
+          onClick={closeMenu}
+        ></div>
+      )}
+    </>
   );
 }
 
