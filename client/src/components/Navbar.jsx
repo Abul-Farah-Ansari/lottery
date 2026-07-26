@@ -52,14 +52,15 @@ function Navbar() {
             <a href="/" onClick={closeMenu}>
               Home
             </a>
+              <a href="#history" onClick={closeMenu}>
+              History
+            </a>
 
             <a href="#rules" onClick={closeMenu}>
               Rules
             </a>
 
-            <a href="#history" onClick={closeMenu}>
-              History
-            </a>
+          
           </div>
 
           {/* Hamburger */}

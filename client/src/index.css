@@ -1,128 +1,200 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+/* =========================================
+   GOOGLE FONTS
+========================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+/* =========================================
+   RESET
+========================================= */
 
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
-  font-family:"Poppins",sans-serif;
-  background:#000;
-  color:white;
+  background:
+    radial-gradient(circle at top,#2a1d00 0%,#11111d 30%,#0b0b14 70%);
+  color:#fff;
+  overflow-x:hidden;
+  font-family:'Inter',sans-serif;
 }
+
+/* =========================================
+   TYPOGRAPHY
+========================================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.logo-text,
+.hero-title,
+.hero-heading,
+.section-title,
+button,
+.nav-links a{
+  font-family:'Playfair Display',serif;
+}
+
+h1,
+h2,
+h3{
+  font-weight:800;
+  letter-spacing:.5px;
+}
+
+h4,
+h5,
+h6{
+  font-weight:700;
+}
+
+p,
+span,
+label,
+input,
+textarea,
+select,
+li{
+  font-family:'Inter',sans-serif;
+}
+
+/* =========================================
+   NUMBERS
+========================================= */
+
+.ticket-number,
+.result-number,
+.winner-ticket,
+.draw-time,
+.countdown,
+.history-table td,
+.live-number,
+.result-box-number{
+  font-family:'IBM Plex Mono',monospace;
+  font-weight:700;
+  letter-spacing:2px;
+}
+
+.history-table th{
+  font-family:'Playfair Display',serif;
+  font-weight:700;
+}
+
+/* =========================================
+   GLOBAL
+========================================= */
 
 a{
   text-decoration:none;
+  color:inherit;
 }
 
 button{
   cursor:pointer;
+  transition:.3s;
+}
+
+button:hover{
+  filter:brightness(1.05);
 }
 
 input,
 select,
+textarea,
 button{
   font-family:inherit;
 }
-.container {
-  width: 90%;
-  max-width: 1280px;
-  margin: auto;
+
+img{
+  max-width:100%;
+  display:block;
 }
 
-.section {
-  padding: 80px 0;
+/* =========================================
+   LAYOUT
+========================================= */
+
+.container{
+  width:90%;
+  max-width:1280px;
+  margin:auto;
 }
 
-.section-title {
-  text-align: center;
-  font-size: 42px;
-  font-weight: 700;
-  margin-bottom: 50px;
-  color: #F4C430;
+.section{
+  padding:80px 0;
 }
 
-.card {
-  background: #171722;
-  border: 1px solid #2C2C3C;
-  border-radius: 20px;
-  padding: 30px;
-}
-html {
-  scroll-behavior: smooth;
-}
-::selection {
-  background: #FFD700;
-  color: #111;
-}
-::-webkit-scrollbar {
-  width: 10px;
+.section-title{
+  text-align:center;
+  font-size:42px;
+  color:#F4C430;
+  margin-bottom:50px;
 }
 
-::-webkit-scrollbar-track {
-  background: #0b0b14;
+.card{
+  background:#171722;
+  border:1px solid #2C2C3C;
+  border-radius:20px;
+  padding:30px;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #FFD700;
-  border-radius: 50px;
+/* =========================================
+   SCROLLBAR
+========================================= */
+
+::selection{
+  background:#FFD700;
+  color:#111;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #ffca28;
+::-webkit-scrollbar{
+  width:10px;
 }
-body{
-    background:
-        radial-gradient(circle at top,#2a1d00 0%,#11111d 30%,#0b0b14 70%);
+
+::-webkit-scrollbar-track{
+  background:#0b0b14;
 }
+
+::-webkit-scrollbar-thumb{
+  background:#FFD700;
+  border-radius:50px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background:#ffca28;
+}
+
+/* =========================================
+   ANIMATION
+========================================= */
+
 @keyframes fadeUp{
 
-from{
+  from{
+    opacity:0;
+    transform:translateY(30px);
+  }
 
-opacity:0;
-
-transform:translateY(30px);
-
-}
-
-to{
-
-opacity:1;
-
-transform:translateY(0);
-
-}
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 
 }
 
 .hero,
 .history-section,
 .footer{
-
-animation:fadeUp .8s ease;
-
-}
-button{
-
-transition:.3s;
-
-}
-
-button:hover{
-
-filter:brightness(1.05);
-
-}
-img{
-
-max-width:100%;
-
-display:block;
-
-}
-*{
-
--webkit-tap-highlight-color:transparent;
-
+  animation:fadeUp .8s ease;
 }
