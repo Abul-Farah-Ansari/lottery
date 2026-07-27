@@ -20,8 +20,7 @@ html{
 }
 
 body{
-  background:
-    radial-gradient(circle at top,#2a1d00 0%,#11111d 30%,#0b0b14 70%);
+  background:#000;
   color:#fff;
   overflow-x:hidden;
   font-family:'Inter',sans-serif;
@@ -198,3 +197,4 @@ img{
 .footer{
   animation:fadeUp .8s ease;
 }
+

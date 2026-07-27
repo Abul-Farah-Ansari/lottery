@@ -53,7 +53,7 @@ function Navbar() {
               Home
             </a>
               <a href="#history" onClick={closeMenu}>
-              History
+              Winner List
             </a>
 
             <a href="#rules" onClick={closeMenu}>

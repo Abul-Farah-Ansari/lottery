@@ -182,3 +182,15 @@
     border-right-color: var(--border);
   }
 }
+.global-bg{
+    position:fixed;
+    inset:0;
+
+    background:url("/client/src//assets/images/casino-bg.jpg") center/cover no-repeat;
+
+    opacity:.08;
+
+    z-index:-999;
+
+    pointer-events:none;
+}

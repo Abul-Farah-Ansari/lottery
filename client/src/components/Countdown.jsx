@@ -2,88 +2,106 @@ import { useEffect, useState } from "react";
 import "../styles/countdown.css";
 
 function Countdown({ drawTime, visibleAt, onComplete }) {
-  const calculateTimeLeft = () => {
-    const difference = new Date(visibleAt) - new Date();
+ const calculateTimeLeft = () => {
+  const difference = new Date(visibleAt) - new Date();
 
-    if (difference <= 0) {
-      return null;
-    }
+  if (difference <= 0) {
+    return null;
+  }
 
-    return {
-      hours: Math.floor(difference / (1000 * 60 * 60)),
-      minutes: Math.floor(
-        (difference % (1000 * 60 * 60)) / (1000 * 60)
-      ),
-      seconds: Math.floor(
-        (difference % (1000 * 60)) / 1000
-      ),
-    };
+  return {
+    minutes: Math.floor(difference / (1000 * 60)),
+    seconds: Math.floor((difference % (1000 * 60)) / 1000),
   };
+};
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      const remaining = calculateTimeLeft();
+useEffect(() => {
 
-      setTimeLeft(remaining);
+  const timer = setInterval(() => {
 
-      if (!remaining) {
-        clearInterval(timer);
+    const remaining = calculateTimeLeft();
 
-        if (onComplete) {
-          onComplete();
-        }
-      }
-    }, 1000);
+    setTimeLeft(remaining);
 
-    return () => clearInterval(timer);
-  }, []);
+    if (!remaining) {
 
-  if (!timeLeft) {
-    return (
-      <div className="countdown-card">
-        <h2>Updating Result...</h2>
-      </div>
-    );
-  }
+      clearInterval(timer);
 
+      onComplete?.();
+
+    }
+
+  },1000);
+
+  return () => clearInterval(timer);
+
+}, [visibleAt, onComplete]);
+
+if (!timeLeft) {
   return (
     <div className="countdown-card">
-<div className="border-rays"></div>
-      <span className="countdown-badge">
-        ⏳ NEXT DRAW
-      </span>
-
-      <h2 className="draw-time">
-        {drawTime}
+      <h2 className="updating-result">
+        🎉 Updating Result...
       </h2>
+    </div>
+  );
+}
+  return (
+  <div className="countdown-card">
 
-      <div className="countdown-grid">
+    {/* Background Glow */}
+    <div className="card-glow"></div>
 
-        <div className="time-box">
-          <h1>{String(timeLeft.hours).padStart(2, "0")}</h1>
-          <span>Hours</span>
+    {/* Animated Border Rays */}
+    <div className="border-rays"></div>
+
+    {/* Floating Particles */}
+    <div className="card-particles">
+      {[...Array(8)].map((_, i) => (
+        <span
+          key={i}
+          className="particle"
+          style={{
+            "--delay": `${i * 0.4}s`,
+            "--left": `${10 + i * 11}%`,
+          }}
+        />
+      ))}
+    </div>
+
+    <span className="countdown-badge">
+      ⏳ NEXT DRAW
+    </span>
+
+    <h2 className="draw-time">
+      {drawTime}
+    </h2>
+
+    <div className="countdown-grid">
+
+      <div className="time-box timer">
+
+        <div className="timer-value">
+          {String(timeLeft.minutes).padStart(2, "0")}:
+          {String(timeLeft.seconds).padStart(2, "0")}
         </div>
 
-        <div className="time-box">
-          <h1>{String(timeLeft.minutes).padStart(2, "0")}</h1>
-          <span>Minutes</span>
-        </div>
-
-        <div className="time-box">
-          <h1>{String(timeLeft.seconds).padStart(2, "0")}</h1>
-          <span>Seconds</span>
+        <div className="timer-label">
+          TIME REMAINING
         </div>
 
       </div>
 
-      <p className="waiting-text">
-        Waiting for today's lucky winner...
-      </p>
-
     </div>
-  );
+
+    <p className="waiting-text">
+      🎯 Result will be announced in a few moments.
+    </p>
+
+  </div>
+);
 }
 
 export default Countdown;

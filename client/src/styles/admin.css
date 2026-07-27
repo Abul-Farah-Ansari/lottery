@@ -1,6 +1,9 @@
 .admin-section{
     padding:80px 20px;
 }
+body{
+  background-color: #000000;
+}
 
 .admin-container{
 
@@ -205,7 +208,7 @@ padding:25px;
 }
 .result-form-container {
   width: 100%;
-  background: #fff;
+  background: black;
   border-radius: 12px;
   padding: 25px;
   margin-bottom: 30px;
@@ -666,4 +669,99 @@ padding:25px;
 
 .excel-btn:hover{
     background:#15803d;
+}
+.time-picker{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.time-picker label{
+    color:#FFD700;
+    font-weight:600;
+}
+
+.time-picker input{
+    width:100%;
+}
+
+.time-picker small{
+    color:#999;
+    font-size:12px;
+}
+.react-datepicker-wrapper{
+    width:100%;
+}
+
+.react-datepicker__input-container{
+    width:100%;
+}
+
+.time-input{
+    width:100%;
+}
+
+.react-datepicker-popper{
+    z-index:9999 !important;
+}
+
+.react-datepicker{
+    margin-left:0 !important;
+}
+/* ==========================================
+   REACT DATE PICKER
+========================================== */
+
+.react-datepicker{
+    background:#181820 !important;
+    border:1px solid #303040 !important;
+    border-radius:14px;
+    overflow:hidden;
+    color:#fff;
+    font-family:inherit;
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
+}
+
+.react-datepicker__header{
+    background:#F7B500 !important;
+    border:none;
+}
+
+.react-datepicker__current-month{
+    color:#111 !important;
+    font-weight:700;
+}
+
+.react-datepicker__day-name{
+    color:#111 !important;
+    font-weight:600;
+}
+
+.react-datepicker__day{
+    color:#fff !important;
+    transition:.2s;
+}
+
+.react-datepicker__day:hover{
+    background:#F7B500 !important;
+    color:#111 !important;
+    border-radius:50%;
+}
+
+.react-datepicker__day--selected{
+    background:#F7B500 !important;
+    color:#111 !important;
+}
+
+.react-datepicker__day--keyboard-selected{
+    background:#F7B500 !important;
+    color:#111 !important;
+}
+
+.react-datepicker__navigation-icon::before{
+    border-color:#111 !important;
+}
+
+.react-datepicker__triangle{
+    display:none;
 }

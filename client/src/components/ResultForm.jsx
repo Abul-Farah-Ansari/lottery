@@ -6,14 +6,41 @@ import ConfirmModal from "./ConfirmModal";
 
 import "../styles/admin.css";
 
+const drawTimes = [
+  "12:00 AM", "12:30 AM",
+  "01:00 AM", "01:30 AM",
+  "02:00 AM", "02:30 AM",
+  "03:00 AM", "03:30 AM",
+  "04:00 AM", "04:30 AM",
+  "05:00 AM", "05:30 AM",
+  "06:00 AM", "06:30 AM",
+  "07:00 AM", "07:30 AM",
+  "08:00 AM", "08:30 AM",
+  "09:00 AM", "09:30 AM",
+  "10:00 AM", "10:30 AM",
+  "11:00 AM", "11:30 AM",
+  "12:00 PM", "12:30 PM",
+  "01:00 PM", "01:30 PM",
+  "02:00 PM", "02:30 PM",
+  "03:00 PM", "03:30 PM",
+  "04:00 PM", "04:30 PM",
+  "05:00 PM", "05:30 PM",
+  "06:00 PM", "06:30 PM",
+  "07:00 PM", "07:30 PM",
+  "08:00 PM", "08:30 PM",
+  "09:00 PM", "09:30 PM",
+  "10:00 PM", "10:30 PM",
+  "11:00 PM", "11:30 PM",
+];
+
 function ResultForm({
   selectedResult,
   setSelectedResult,
   setRefresh,
 }) {
   const today = new Date().toLocaleDateString("en-CA", {
-  timeZone: "Asia/Kolkata",
-});
+    timeZone: "Asia/Kolkata",
+  });
 
   const [formData, setFormData] = useState({
     ticketNumber: "",
@@ -38,53 +65,32 @@ function ResultForm({
       drawDate: selectedResult.drawDate,
       drawTime: selectedResult.drawTime,
     });
-  }, [selectedResult]);
+  }, [selectedResult, today]);
 
-  const drawTimes = [
-    "12:00 AM",
-    "01:00 AM",
-    "02:00 AM",
-    "03:00 AM",
-    "04:00 AM",
-    "05:00 AM",
-    "06:00 AM",
-    "07:00 AM",
-    "08:00 AM",
-    "09:00 AM",
-    "10:00 AM",
-    "11:00 AM",
-    "12:00 PM",
-    "01:00 PM",
-    "02:00 PM",
-    "03:00 PM",
-    "04:00 PM",
-    "05:00 PM",
-    "06:00 PM",
-    "07:00 PM",
-    "08:00 PM",
-    "09:00 PM",
-    "10:00 PM",
-    "11:00 PM",
-  ];
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
-const handleChange = (e) => {
-  const { name, value } = e.target;
-
-  if (name === "ticketNumber") {
-    if (value === "" || (Number(value) >= 1 && Number(value) <= 99)) {
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
+    if (name === "ticketNumber") {
+      if (
+        value === "" ||
+        (/^\d+$/.test(value) &&
+          Number(value) >= 1 &&
+          Number(value) <= 10)
+      ) {
+        setFormData((prev) => ({
+          ...prev,
+          ticketNumber: value,
+        }));
+      }
+      return;
     }
-    return;
-  }
 
-  setFormData({
-    ...formData,
-    [name]: value,
-  });
-};
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   const resetForm = () => {
     setFormData({
       ticketNumber: "",
@@ -107,11 +113,10 @@ const handleChange = (e) => {
     } catch (error) {
       toast.error(
         error.response?.data?.message ||
-          "Something went wrong."
+        "Something went wrong."
       );
     }
   };
-  
 
   const updateResult = async () => {
     try {
@@ -128,7 +133,7 @@ const handleChange = (e) => {
     } catch (error) {
       toast.error(
         error.response?.data?.message ||
-          "Something went wrong."
+        "Something went wrong."
       );
     }
   };
@@ -159,14 +164,16 @@ const handleChange = (e) => {
         className="result-form"
         onSubmit={handleSubmit}
       >
- <input
-  type="number"
-  name="ticketNumber"
-  value={formData.ticketNumber}
-  onChange={handleChange}
-  min="1"
-  max="99"
-/>
+        <input
+          type="number"
+          name="ticketNumber"
+          placeholder="Ticket Number (1-10)"
+          value={formData.ticketNumber}
+          onChange={handleChange}
+          min="1"
+          max="10"
+          required
+        />
 
         <input
           type="date"
@@ -176,20 +183,31 @@ const handleChange = (e) => {
           required
         />
 
-        <select
-          name="drawTime"
-          value={formData.drawTime}
-          onChange={handleChange}
-          required
-        >
-          <option value="">Select Draw Time</option>
+        <div className="time-picker">
+        
 
-          {drawTimes.map((time) => (
-            <option key={time} value={time}>
-              {time}
-            </option>
-          ))}
-        </select>
+          <select
+            name="drawTime"
+            value={formData.drawTime}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select Draw Time</option>
+
+            {drawTimes.map((time) => (
+              <option
+                key={time}
+                value={time}
+              >
+                {time}
+              </option>
+            ))}
+          </select>
+
+          <small>
+            Draws are available every 30 minutes.
+          </small>
+        </div>
 
         <button type="submit">
           {selectedResult

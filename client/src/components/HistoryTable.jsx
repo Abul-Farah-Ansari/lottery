@@ -40,7 +40,8 @@ export default function HistoryTable() {
   };
 
   return (
-    <section className="history">
+    <section className="history" id="history">
+  <div className="history-content">
 
       <h2>Winning Results</h2>
 
@@ -99,7 +100,7 @@ export default function HistoryTable() {
         </table>
 
       </div>
-
+</div>
     </section>
   );
 }

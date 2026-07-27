@@ -28,12 +28,32 @@ if (Number(ticketNumber) < 1 || Number(ticketNumber) > 10) {
 
     // Create visibleAt
 // Create visibleAt in IST and store as UTC
+// Convert draw time to Date
 const [year, month, day] = drawDate.split("-").map(Number);
 
-// IST is UTC+5:30
-const visibleAt = new Date(
-  Date.UTC(year, month - 1, day, hours - 5, minutes - 30, 0, 0)
+const drawDateTime = new Date(
+  year,
+  month - 1,
+  day,
+  hours,
+  minutes,
+  0,
+  0
 );
+
+// Countdown starts 5 minutes before draw
+const visibleAt = new Date(
+  drawDateTime.getTime() - 5 * 60 * 1000
+);
+
+console.log("Draw Time:", drawTime);
+console.log("Draw DateTime:", drawDateTime);
+console.log("Visible At:", visibleAt);
+
+
+
+
+
     // Prevent duplicate result
     const existingResult = await Result.findOne({
       drawDate,
@@ -123,20 +143,15 @@ console.log("=================================");
     }
 
     // Countdown starts 10 minutes before draw
-    const countdownStart = new Date(
-      nextResult.visibleAt.getTime() - 10 * 60 * 1000
-    );
-
-    // Countdown Mode
-    if (now >= countdownStart && now < nextResult.visibleAt) {
+if (nextResult) {
   return res.status(200).json({
-  success: true,
-  mode: "countdown",
-  drawTime: nextResult.drawTime,
-  visibleAt: nextResult.visibleAt,
-  serverTime: now,
-});
-    }
+    success: true,
+    mode: "countdown",
+    drawTime: nextResult.drawTime,
+    visibleAt: nextResult.visibleAt,
+    serverTime: now,
+  });
+}
 
     // Current Winner
     const currentResult = await Result.findOne({
@@ -311,11 +326,30 @@ const updateResult = async (req, res) => {
     }
 
     // Create visibleAt in IST and store as UTC
+// Convert draw time to Date
 const [year, month, day] = drawDate.split("-").map(Number);
 
-const visibleAt = new Date(
-  Date.UTC(year, month - 1, day, hours - 5, minutes - 30, 0, 0)
+const drawDateTime = new Date(
+  year,
+  month - 1,
+  day,
+  hours,
+  minutes,
+  0,
+  0
 );
+
+// Countdown starts 5 minutes before draw
+const visibleAt = new Date(
+  drawDateTime.getTime() - 5 * 60 * 1000
+);
+
+console.log("Draw Time:", drawTime);
+console.log("Draw DateTime:", drawDateTime);
+console.log("Visible At:", visibleAt);
+
+
+
 
 result.visibleAt = visibleAt;
 
