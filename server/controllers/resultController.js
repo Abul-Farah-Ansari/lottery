@@ -1,60 +1,28 @@
+
+console.log("LOADED RESULT CONTROLLER:", __filename);
 const Result = require("../models/Result");
-
-
 // ======================================
 // Add New Result (Admin)
 // ======================================
 const addResult = async (req, res) => {
   try {
-   const { ticketNumber, drawDate, drawTime } = req.body;
+    const { ticketNumber, drawDate, drawTime } = req.body;
 
-if (!ticketNumber || !drawDate || !drawTime) {
-  return res.status(400).json({
-    success: false,
-    message: "All fields are required.",
-  });
-}
-if (Number(ticketNumber) < 1 || Number(ticketNumber) > 10) {
-  return res.status(400).json({
-    message: "Ticket number must be between 1 and 10.",
-  });
-}
-    // Convert Draw Time (12-hour to 24-hour)
-    const [time, period] = drawTime.split(" ");
-    let [hours, minutes] = time.split(":").map(Number);
+    if (!ticketNumber || !drawDate || !drawTime) {
+      return res.status(400).json({
+        success: false,
+        message: "All fields are required.",
+      });
+    }
 
-    if (period === "PM" && hours !== 12) hours += 12;
-    if (period === "AM" && hours === 12) hours = 0;
+    if (Number(ticketNumber) < 1 || Number(ticketNumber) > 10) {
+      return res.status(400).json({
+        success: false,
+        message: "Ticket number must be between 1 and 10.",
+      });
+    }
 
-    // Create visibleAt
-// Create visibleAt in IST and store as UTC
-// Convert draw time to Date
-const [year, month, day] = drawDate.split("-").map(Number);
-
-const drawDateTime = new Date(
-  year,
-  month - 1,
-  day,
-  hours,
-  minutes,
-  0,
-  0
-);
-
-// Countdown starts 5 minutes before draw
-const visibleAt = new Date(
-  drawDateTime.getTime() - 5 * 60 * 1000
-);
-
-console.log("Draw Time:", drawTime);
-console.log("Draw DateTime:", drawDateTime);
-console.log("Visible At:", visibleAt);
-
-
-
-
-
-    // Prevent duplicate result
+    // Prevent duplicate
     const existingResult = await Result.findOne({
       drawDate,
       drawTime,
@@ -67,13 +35,38 @@ console.log("Visible At:", visibleAt);
       });
     }
 
-    // Save Result
+    // Convert 12-hour time to 24-hour
+    const [time, period] = drawTime.split(" ");
+    let [hours, minutes] = time.split(":").map(Number);
+
+    if (period === "PM" && hours !== 12) {
+      hours += 12;
+    }
+
+    if (period === "AM" && hours === 12) {
+      hours = 0;
+    }
+
+    const [year, month, day] = drawDate.split("-").map(Number);
+
+// Create the date using the server's local timezone (IST on your machine)
+const drawDateTime = new Date(year, month - 1, day);
+drawDateTime.setHours(hours);
+drawDateTime.setMinutes(minutes);
+drawDateTime.setSeconds(0);
+drawDateTime.setMilliseconds(0);
+
+// Countdown starts 5 minutes before draw
+const visibleAt = new Date(drawDateTime.getTime() - 5 * 60 * 1000);
+
+
     const result = await Result.create({
       ticketNumber,
       drawDate,
       drawTime,
       visibleAt,
     });
+    console.log("Saved visibleAt:", result.visibleAt.toISOString());
 
     return res.status(201).json({
       success: true,
@@ -94,83 +87,81 @@ console.log("Visible At:", visibleAt);
 const getLiveResult = async (req, res) => {
   try {
     const now = new Date();
-    console.log("=================================");
-console.log("Current Server Time:", now);
-console.log("Current ISO Time:", now.toISOString());
 
-const allResults = await Result.find().sort({ visibleAt: 1 });
+    const results = await Result.find().sort({ visibleAt: 1 });
 
-console.log("All Results:");
+    if (!results.length) {
+      return res.status(404).json({
+        success: false,
+        message: "No results available.",
+      });
+    }
 
-allResults.forEach((r) => {
-  console.log({
-    ticketNumber: r.ticketNumber,
-    drawDate: r.drawDate,
-    drawTime: r.drawTime,
-    visibleAt: r.visibleAt,
-  });
-});
+    let currentWinner = null;
 
-console.log("=================================");
-    console.log("=================================");
-console.log("Current Server Time:", now);
-console.log("Current ISO Time:", now.toISOString());
-console.log("=================================");
+    for (const result of results) {
 
-    // Next upcoming result
-    const nextResult = await Result.findOne({
-      visibleAt: { $gt: now },
-    }).sort({ visibleAt: 1 });
+      // visibleAt stored in DB = 5 minutes before draw
+      const countdownStart = new Date(result.visibleAt);
 
-    // If no future result exists
-    if (!nextResult) {
-      const latestResult = await Result.findOne().sort({
-        visibleAt: -1,
+      // Actual draw time
+      const actualDrawTime = new Date(
+        countdownStart.getTime() + 5 * 60 * 1000
+      );
+
+      console.log({
+        now,
+        countdownStart,
+        actualDrawTime,
       });
 
-      if (!latestResult) {
-        return res.status(404).json({
-          success: false,
-          message: "No results available.",
+      // Before countdown -> show previous winner
+      if (now < countdownStart) {
+
+        if (currentWinner) {
+          return res.status(200).json({
+            success: true,
+            mode: "winner",
+            data: currentWinner,
+          });
+        }
+
+        continue;
+      }
+
+      // Countdown (last 5 minutes only)
+      if (now >= countdownStart && now < actualDrawTime) {
+
+        return res.status(200).json({
+          success: true,
+          mode: "countdown",
+          drawTime: result.drawTime,
+
+          // IMPORTANT:
+          // Send DRAW TIME to frontend so countdown runs
+          visibleAt: actualDrawTime,
+
+          serverTime: now,
         });
       }
 
+      // Draw completed
+      if (now >= actualDrawTime) {
+        currentWinner = result;
+      }
+    }
+
+    if (currentWinner) {
       return res.status(200).json({
         success: true,
         mode: "winner",
-        data: latestResult,
+        data: currentWinner,
       });
     }
 
-    // Countdown starts 10 minutes before draw
-if (nextResult) {
-  return res.status(200).json({
-    success: true,
-    mode: "countdown",
-    drawTime: nextResult.drawTime,
-    visibleAt: nextResult.visibleAt,
-    serverTime: now,
-  });
-}
-
-    // Current Winner
-    const currentResult = await Result.findOne({
-      visibleAt: { $lte: now },
-    }).sort({
-      visibleAt: -1,
-    });
-
-    if (!currentResult) {
-      return res.status(404).json({
-        success: false,
-        message: "No live result found.",
-      });
-    }
-
-    return res.status(200).json({
-      success: true,
-      mode: "winner",
-      data: currentResult,
+    return res.status(404).json({
+      success: false,
+      message: "No live result found.",
     });
 
   } catch (error) {
@@ -180,15 +171,16 @@ if (nextResult) {
     });
   }
 };
-
 /// ======================================
 // Result History By Date (Public)
 // ======================================
 const getResultHistory = async (req, res) => {
   try {
     const date =
-      req.query.date ||
-      new Date().toISOString().split("T")[0];
+  req.query.date ||
+  new Date().toLocaleDateString("en-CA", {
+    timeZone: "Asia/Kolkata",
+  });
 
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
@@ -236,8 +228,10 @@ const getResultHistory = async (req, res) => {
 const getTodayResults = async (req, res) => {
   try {
     const date =
-      req.query.date ||
-      new Date().toISOString().split("T")[0];
+  req.query.date ||
+  new Date().toLocaleDateString("en-CA", {
+    timeZone: "Asia/Kolkata",
+  });
 
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
@@ -283,7 +277,6 @@ const updateResult = async (req, res) => {
     const { id } = req.params;
     const { ticketNumber, drawDate, drawTime } = req.body;
 
-    // Find current result
     const result = await Result.findById(id);
 
     if (!result) {
@@ -293,11 +286,10 @@ const updateResult = async (req, res) => {
       });
     }
 
-    // Prevent duplicate draw time for the same date
     const existingResult = await Result.findOne({
       drawDate,
       drawTime,
-      _id: { $ne: id }, // Ignore the current record
+      _id: { $ne: id },
     });
 
     if (existingResult) {
@@ -307,13 +299,11 @@ const updateResult = async (req, res) => {
       });
     }
 
-    // Update fields
-    
     result.ticketNumber = ticketNumber;
     result.drawDate = drawDate;
     result.drawTime = drawTime;
 
-    // Convert drawTime to visibleAt
+    // Convert 12-hour time to 24-hour
     const [time, period] = drawTime.split(" ");
     let [hours, minutes] = time.split(":").map(Number);
 
@@ -325,33 +315,18 @@ const updateResult = async (req, res) => {
       hours = 0;
     }
 
-    // Create visibleAt in IST and store as UTC
-// Convert draw time to Date
-const [year, month, day] = drawDate.split("-").map(Number);
+   const [year, month, day] = drawDate.split("-").map(Number);
 
-const drawDateTime = new Date(
-  year,
-  month - 1,
-  day,
-  hours,
-  minutes,
-  0,
-  0
-);
+// Create the date using the server's local timezone (IST on your machine)
+const drawDateTime = new Date(year, month - 1, day);
+drawDateTime.setHours(hours);
+drawDateTime.setMinutes(minutes);
+drawDateTime.setSeconds(0);
+drawDateTime.setMilliseconds(0);
 
 // Countdown starts 5 minutes before draw
-const visibleAt = new Date(
-  drawDateTime.getTime() - 5 * 60 * 1000
-);
-
-console.log("Draw Time:", drawTime);
-console.log("Draw DateTime:", drawDateTime);
-console.log("Visible At:", visibleAt);
-
-
-
-
-result.visibleAt = visibleAt;
+const visibleAt = new Date(drawDateTime.getTime() - 5 * 60 * 1000);
+    result.visibleAt = visibleAt;
 
     await result.save();
 
@@ -360,11 +335,14 @@ result.visibleAt = visibleAt;
       message: "Result updated successfully.",
       data: result,
     });
+
   } catch (error) {
+
     return res.status(500).json({
       success: false,
       message: error.message,
     });
+
   }
 };
 // ======================================

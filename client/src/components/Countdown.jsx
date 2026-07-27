@@ -2,106 +2,108 @@ import { useEffect, useState } from "react";
 import "../styles/countdown.css";
 
 function Countdown({ drawTime, visibleAt, onComplete }) {
- const calculateTimeLeft = () => {
-  const difference = new Date(visibleAt) - new Date();
 
-  if (difference <= 0) {
-    return null;
-  }
+  const calculateTimeLeft = () => {
+    const target = new Date(visibleAt).getTime();
+    const now = Date.now();
 
-  return {
-    minutes: Math.floor(difference / (1000 * 60)),
-    seconds: Math.floor((difference % (1000 * 60)) / 1000),
+    let difference = target - now;
+
+    if (difference < 0) {
+      difference = 0;
+    }
+
+    return {
+      minutes: Math.floor(difference / (1000 * 60)),
+      seconds: Math.floor((difference % (1000 * 60)) / 1000),
+      completed: difference === 0,
+    };
   };
-};
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
-useEffect(() => {
+  useEffect(() => {
+    setTimeLeft(calculateTimeLeft());
 
-  const timer = setInterval(() => {
+    const timer = setInterval(() => {
+      const remaining = calculateTimeLeft();
 
-    const remaining = calculateTimeLeft();
+      setTimeLeft(remaining);
 
-    setTimeLeft(remaining);
+      if (remaining.completed) {
+        clearInterval(timer);
 
-    if (!remaining) {
+        // Wait 1 second before requesting the winner
+        setTimeout(() => {
+          onComplete?.();
+        }, 1000);
+      }
+      console.log("Client Time:", new Date().toLocaleTimeString());
 
-      clearInterval(timer);
+console.log("Target Time:", new Date(visibleAt).toLocaleTimeString());
 
-      onComplete?.();
+console.log(
+  "Difference (seconds):",
+  Math.floor((new Date(visibleAt).getTime() - Date.now()) / 1000)
+);
 
-    }
+    }, 1000);
 
-  },1000);
+    return () => clearInterval(timer);
+    
 
-  return () => clearInterval(timer);
+  }, [visibleAt, onComplete]);
 
-}, [visibleAt, onComplete]);
-
-if (!timeLeft) {
   return (
     <div className="countdown-card">
-      <h2 className="updating-result">
-        🎉 Updating Result...
-      </h2>
-    </div>
-  );
-}
-  return (
-  <div className="countdown-card">
 
-    {/* Background Glow */}
-    <div className="card-glow"></div>
+      {/* Background Glow */}
+      <div className="card-glow"></div>
 
-    {/* Animated Border Rays */}
-    <div className="border-rays"></div>
+      {/* Animated Border Rays */}
+      <div className="border-rays"></div>
 
-    {/* Floating Particles */}
-    <div className="card-particles">
-      {[...Array(8)].map((_, i) => (
-        <span
-          key={i}
-          className="particle"
-          style={{
-            "--delay": `${i * 0.4}s`,
-            "--left": `${10 + i * 11}%`,
-          }}
-        />
-      ))}
-    </div>
-
-    <span className="countdown-badge">
-      ⏳ NEXT DRAW
-    </span>
-
-    <h2 className="draw-time">
-      {drawTime}
-    </h2>
-
-    <div className="countdown-grid">
-
-      <div className="time-box timer">
-
-        <div className="timer-value">
-          {String(timeLeft.minutes).padStart(2, "0")}:
-          {String(timeLeft.seconds).padStart(2, "0")}
-        </div>
-
-        <div className="timer-label">
-          TIME REMAINING
-        </div>
-
+      {/* Floating Particles */}
+      <div className="card-particles">
+        {[...Array(8)].map((_, i) => (
+          <span
+            key={i}
+            className="particle"
+            style={{
+              "--delay": `${i * 0.4}s`,
+              "--left": `${10 + i * 11}%`,
+            }}
+          />
+        ))}
       </div>
 
+      <span className="countdown-badge">
+        ⏳ NEXT DRAW
+      </span>
+
+      <h2 className="draw-time">
+        {drawTime}
+      </h2>
+
+      <div className="countdown-grid">
+        <div className="time-box timer">
+          <div className="timer-value">
+            {String(timeLeft.minutes).padStart(2, "0")}:
+            {String(timeLeft.seconds).padStart(2, "0")}
+          </div>
+
+          <div className="timer-label">
+            TIME REMAINING
+          </div>
+        </div>
+      </div>
+
+      <p className="waiting-text">
+        🎯 Result will be announced in a few moments.
+      </p>
+
     </div>
-
-    <p className="waiting-text">
-      🎯 Result will be announced in a few moments.
-    </p>
-
-  </div>
-);
+  );
 }
 
 export default Countdown;

@@ -47,5 +47,8 @@ mongoose
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
+  console.log("process.env.TZ =", process.env.TZ);
+console.log("Intl TZ =", Intl.DateTimeFormat().resolvedOptions().timeZone);
+console.log("Offset =", new Date().getTimezoneOffset());
   console.log(`🚀 Server running on port ${PORT}`);
 });

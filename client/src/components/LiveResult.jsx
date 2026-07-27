@@ -26,8 +26,7 @@ function LiveResult() {
   useEffect(() => {
     fetchLiveResult();
 
-    const interval = setInterval(fetchLiveResult, 10000);
-
+   const interval = setInterval(fetchLiveResult, 1000);
     return () => clearInterval(interval);
   }, []);
 

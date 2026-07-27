@@ -1,81 +1,32 @@
 /* =========================================
    COUNTDOWN CARD
 ========================================= */
-
 .countdown-card{
     position:relative;
-    overflow:hidden;
 
-    max-width:760px;
+    max-width:600px;
+
     margin:auto;
 
-    padding:45px 35px;
-
-    border-radius:28px;
-
-    background:#121212;
+    padding:10px 0;
 
     text-align:center;
 
-    color:#fff;
+    background:transparent;
 
-    border:1px solid rgba(255,215,0,.12);
+    border:none;
 
-    box-shadow:
-        0 25px 60px rgba(0,0,0,.45),
-        inset 0 1px 0 rgba(255,255,255,.04);
+    border-radius:0;
 
-    z-index:1;
+    box-shadow:none;
+
+    overflow:visible;
 }
+
 /* =========================================
    ANIMATED BORDER
 ========================================= */
-.countdown-card::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    padding:2px;
-
-    border-radius:28px;
-
-    background:linear-gradient(
-        135deg,
-        rgba(255,215,0,.10),
-        rgba(255,255,255,.65),
-        rgba(255,215,0,.10)
-    );
-
-    -webkit-mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-
-    -webkit-mask-composite:xor;
-            mask-composite:exclude;
-
-    animation:borderGlow 3s ease-in-out infinite;
-
-    pointer-events:none;
-}
-
-.countdown-card::after{
-
-    content:"";
-
-    position:absolute;
-
-    inset:3px;
-
-    border-radius:26px;
-
-    background:#181818;
-
-    z-index:-1;
-}
-
+.
 @keyframes borderGlow{
 
     0%{
@@ -106,36 +57,29 @@
 /* =========================================
    BADGE
 ========================================= */
-
 .countdown-badge{
 
     display:inline-flex;
     align-items:center;
     justify-content:center;
 
-    gap:10px;
+    padding:10px 24px;
 
-    padding:12px 28px;
+    border-radius:50px;
 
-    border-radius:999px;
-
-    background:linear-gradient(
-        135deg,
-        #FFD54F,
-        #FDB813
-    );
+    background:#FDB813;
 
     color:#111;
 
-    font-size:18px;
+    font-size:16px;
 
     font-weight:700;
 
-    box-shadow:
-        0 10px 25px rgba(253,184,19,.35);
+    box-shadow:none;
 
-    margin-bottom:30px;
+    margin-bottom:22px;
 }
+
 /* =========================================
    DRAW TIME
 ========================================= */
@@ -144,42 +88,20 @@
 
     font-family:'IBM Plex Mono', monospace;
 
-    font-size:58px;
+    font-size:48px;
 
     font-weight:700;
 
-    letter-spacing:6px;
+    letter-spacing:4px;
+
+    margin-bottom:22px;
 
     color:#fff;
 
-    margin-bottom:35px;
-
     text-shadow:
-        0 0 8px rgba(255,255,255,.35),
-        0 0 25px rgba(255,215,0,.15);
-
-    animation:drawGlow 2s ease-in-out infinite alternate;
+        0 0 8px rgba(255,255,255,.25);
 }
 
-@keyframes drawGlow{
-
-    from{
-
-        text-shadow:
-            0 0 8px rgba(255,255,255,.25),
-            0 0 20px rgba(255,215,0,.10);
-
-    }
-
-    to{
-
-        text-shadow:
-            0 0 12px rgba(255,255,255,.45),
-            0 0 35px rgba(255,215,0,.35);
-
-    }
-
-}
 
 /* =========================================
    TIMER
@@ -195,61 +117,24 @@
 
     margin-bottom:30px;
 }
-
 .time-box.timer{
 
-    position:relative;
+    width:280px;
 
-    width:360px;
+    min-height:130px;
 
-    min-height:200px;
+    margin:auto;
 
-    display:flex;
+    padding:20px;
 
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
-    border-radius:30px;
-
-    padding:35px 25px;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(255,255,255,.08),
-            rgba(255,255,255,.02)
-        );
-
-    backdrop-filter:blur(18px);
+    background:#1c1c1c;
 
     border:1px solid rgba(255,215,0,.18);
 
+    border-radius:18px;
+
     box-shadow:
-        0 25px 60px rgba(0,0,0,.45),
-        inset 0 1px 0 rgba(255,255,255,.10);
-}
-.time-box.timer::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:260px;
-
-    height:260px;
-
-    background:radial-gradient(
-        circle,
-        rgba(255,215,0,.18),
-        transparent 70%
-    );
-
-    z-index:-1;
-
-    filter:blur(35px);
+        0 8px 20px rgba(0,0,0,.35);
 }
 .timer h1{
 
@@ -291,11 +176,11 @@
 
 .waiting-text{
 
-    color:#bdbdbd;
+    margin-top:18px;
 
-    font-size:18px;
+    font-size:15px;
 
-    margin-top:10px;
+    color:#9d9d9d;
 }
 
 /* =========================================
@@ -434,24 +319,21 @@
 
     font-family:'IBM Plex Mono', monospace;
 
-    font-size:92px;
+    font-size:72px;
 
     font-weight:700;
 
     color:#FDB813;
 
-    letter-spacing:6px;
+    letter-spacing:4px;
 
     line-height:1;
 
     text-shadow:
-        0 0 10px rgba(255,215,0,.45),
-        0 0 30px rgba(255,215,0,.35),
-        0 0 55px rgba(255,215,0,.15);
+        0 0 10px rgba(253,184,19,.25);
 
-    animation:timerPulse 1.2s ease-in-out infinite;
+    animation:none;
 }
-
 @keyframes timerPulse{
 
     0%{
@@ -475,16 +357,15 @@
 }
 .timer-label{
 
-    margin-top:16px;
+    margin-top:10px;
 
-    color:#FFD700;
+    color:#d6b34b;
 
-    font-size:14px;
+    font-size:12px;
 
-    letter-spacing:4px;
+    letter-spacing:3px;
 
     font-weight:600;
-
 }
 .countdown-card{
 
@@ -519,70 +400,7 @@
    CARD GLOW
 =========================== */
 
-.card-glow{
 
-    position:absolute;
-
-    width:450px;
-
-    height:450px;
-
-    left:50%;
-
-    top:50%;
-
-    transform:translate(-50%,-50%);
-
-    background:radial-gradient(
-        circle,
-        rgba(255,215,0,.12),
-        transparent 70%
-    );
-
-    filter:blur(60px);
-
-    z-index:-2;
-}
-
-/* ===========================
-   FLOATING PARTICLES
-=========================== */
-
-.card-particles{
-
-    position:absolute;
-
-    inset:0;
-
-    overflow:hidden;
-
-    pointer-events:none;
-}
-
-.particle{
-
-    position:absolute;
-
-    top:110%;
-
-    left:var(--left);
-
-    width:5px;
-
-    height:5px;
-
-    border-radius:50%;
-
-    background:#FFD700;
-
-    box-shadow:0 0 10px #FFD700;
-
-    opacity:.45;
-
-    animation:floatParticle 6s linear infinite;
-
-    animation-delay:var(--delay);
-}
 
 @keyframes floatParticle{
 
@@ -613,5 +431,174 @@
         opacity:0;
 
     }
+
+}/* =========================================
+   LARGE TABLETS
+========================================= */
+
+@media (max-width: 992px) {
+
+  .countdown-card{
+    max-width:520px;
+    padding:10px 0;
+  }
+
+  .countdown-badge{
+    font-size:15px;
+    padding:8px 22px;
+    margin-bottom:18px;
+  }
+
+  .draw-time{
+    font-size:42px;
+    letter-spacing:3px;
+    margin-bottom:18px;
+  }
+
+  .time-box.timer{
+    width:260px;
+    min-height:125px;
+    padding:18px;
+  }
+
+  .timer-value{
+    font-size:64px;
+    letter-spacing:3px;
+  }
+
+  .timer-label{
+    font-size:11px;
+    letter-spacing:2px;
+  }
+
+  .waiting-text{
+    font-size:14px;
+  }
+
+}
+
+/* =========================================
+   TABLETS
+========================================= */
+
+@media (max-width: 768px) {
+
+  .countdown-card{
+    max-width:100%;
+    padding:8px 0;
+  }
+
+  .countdown-badge{
+    font-size:14px;
+    padding:8px 18px;
+    margin-bottom:16px;
+  }
+
+  .draw-time{
+    font-size:34px;
+    letter-spacing:2px;
+    margin-bottom:16px;
+  }
+
+  .time-box.timer{
+    width:230px;
+    min-height:115px;
+    padding:16px;
+    border-radius:16px;
+  }
+
+  .timer-value{
+    font-size:54px;
+    letter-spacing:2px;
+  }
+
+  .timer-label{
+    font-size:10px;
+    letter-spacing:2px;
+  }
+
+  .waiting-text{
+    font-size:13px;
+    margin-top:16px;
+  }
+
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 576px) {
+
+  .countdown-card{
+    padding:6px 0;
+  }
+
+  .countdown-badge{
+    font-size:13px;
+    padding:7px 16px;
+    margin-bottom:14px;
+  }
+
+  .draw-time{
+    font-size:28px;
+    letter-spacing:2px;
+  }
+
+  .time-box.timer{
+    width:200px;
+    min-height:105px;
+    padding:14px;
+  }
+
+  .timer-value{
+    font-size:46px;
+    letter-spacing:2px;
+  }
+
+  .timer-label{
+    font-size:10px;
+    letter-spacing:1.5px;
+  }
+
+  .waiting-text{
+    font-size:12px;
+    margin-top:14px;
+  }
+
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 400px) {
+
+  .countdown-badge{
+    font-size:12px;
+    padding:6px 14px;
+  }
+
+  .draw-time{
+    font-size:24px;
+  }
+
+  .time-box.timer{
+    width:180px;
+    min-height:95px;
+    padding:12px;
+  }
+
+  .timer-value{
+    font-size:40px;
+  }
+
+  .timer-label{
+    font-size:9px;
+  }
+
+  .waiting-text{
+    font-size:11px;
+  }
 
 }
