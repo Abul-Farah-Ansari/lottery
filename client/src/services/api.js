@@ -1,8 +1,12 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://lottery-backend2.onrender.com/api",
+  baseURL:
+    window.location.hostname === "localhost"
+      ? "http://localhost:5000/api"
+      : "https://lottery-backend2.onrender.com/api",
 });
+
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");

@@ -67,6 +67,10 @@ const visibleAt = new Date(drawDateTime.getTime() - 5 * 60 * 1000);
       visibleAt,
     });
     console.log("Saved visibleAt:", result.visibleAt.toISOString());
+console.log("Server timezone:", Intl.DateTimeFormat().resolvedOptions().timeZone);
+console.log("drawDateTime:", drawDateTime.toString());
+console.log("drawDateTime ISO:", drawDateTime.toISOString());
+
 
     return res.status(201).json({
       success: true,
