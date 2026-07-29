@@ -19,10 +19,12 @@ function TodayResults({
   const [search, setSearch] = useState("");
 
   // Date Filter
-  const [selectedDate, setSelectedDate] = useState(
-    new Date().toISOString().split("T")[0]
-  );
+const getTodayIST = () =>
+  new Date().toLocaleDateString("en-CA", {
+    timeZone: "Asia/Kolkata",
+  });
 
+const [selectedDate, setSelectedDate] = useState(getTodayIST());
   // Draw Time Filter
   const [selectedTime, setSelectedTime] = useState("All");
 
@@ -191,9 +193,7 @@ function TodayResults({
   const handleResetFilters = () => {
     setSearch("");
     setSelectedTime("All");
-    setSelectedDate(
-      new Date().toISOString().split("T")[0]
-    );
+   setSelectedDate(getTodayIST());
     setPage(1);
   };
 
