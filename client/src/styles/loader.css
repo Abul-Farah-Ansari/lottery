@@ -1,99 +1,220 @@
 .loader-wrapper{
+
     position:fixed;
     inset:0;
-    background:#000;
+
+    width:100%;
+    height:100vh;
+
+    overflow:hidden;
+
     display:flex;
     justify-content:center;
     align-items:center;
+
+    background:#000;
+
     z-index:999999;
 }
 
-.loader-content{
-    text-align:center;
+/* ================= VIDEO ================= */
+
+.loader-video{
+
+    position:absolute;
+
+    top:50%;
+    left:50%;
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    transform:translate(-50%,-50%);
+
+    pointer-events:none;
 }
 
-.loader-circle{
-    width:95px;
-    height:95px;
-    border-radius:50%;
-    border:4px solid rgba(247,181,0,.18);
+/* ================= DARK OVERLAY ================= */
+
+.loader-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        linear-gradient(
+            rgba(0,0,0,.35),
+            rgba(0,0,0,.55)
+        );
+
+    backdrop-filter:blur(1px);
+}
+
+/* ================= CONTENT ================= */
+
+.loader-content{
+
+    position:relative;
+
+    z-index:5;
+
     display:flex;
+    flex-direction:column;
     justify-content:center;
     align-items:center;
-    animation:rotate 1.2s linear infinite;
-    margin:auto;
-    box-shadow:
-        0 0 15px rgba(247,181,0,.2),
-        0 0 35px rgba(247,181,0,.12);
+
+    text-align:center;
+
+    animation:fadeUp .9s ease;
 }
 
-.loader-inner{
-    width:65px;
-    height:65px;
-    border-radius:50%;
-    border:5px solid transparent;
-    border-top-color:#f7b500;
-    border-right-color:#f7b500;
-    animation:rotateReverse .8s linear infinite;
-}
+/* ================= TITLE ================= */
 
-.loader-content h2{
-    margin-top:28px;
-    color:#f7b500;
-    font-size:34px;
-    font-weight:700;
-    letter-spacing:1px;
-}
+.loader-title{
 
-.loader-content p{
-    margin-top:10px;
-    color:#c8c8c8;
+    font-size:clamp(2.2rem,5vw,4rem);
+
+    color:#FFD700;
+
+    font-weight:900;
+
     letter-spacing:4px;
-    font-size:15px;
+
+    text-transform:uppercase;
+
+    text-shadow:
+
+        0 0 10px #FFD700,
+        0 0 20px #FFD700,
+        0 0 40px orange,
+        0 0 80px gold;
+
+    animation:glow 2s infinite alternate;
 }
 
-@keyframes rotate{
+/* ================= SUBTITLE ================= */
+
+.loader-subtitle{
+
+    margin-top:18px;
+
+    color:#fff;
+
+    font-size:1.1rem;
+
+    letter-spacing:3px;
+
+    display:flex;
+    align-items:center;
+
+    gap:6px;
+}
+
+/* ================= DOTS ================= */
+
+.loader-subtitle span{
+
+    width:8px;
+    height:8px;
+
+    border-radius:50%;
+
+    background:#FFD700;
+
+    animation:bounce 1s infinite;
+}
+
+.loader-subtitle span:nth-child(2){
+
+    animation-delay:.2s;
+}
+
+.loader-subtitle span:nth-child(3){
+
+    animation-delay:.4s;
+}
+
+/* ================= TITLE GLOW ================= */
+
+@keyframes glow{
 
     from{
-        transform:rotate(0deg);
+
+        text-shadow:
+
+        0 0 10px #FFD700,
+        0 0 20px orange,
+        0 0 40px gold;
     }
 
     to{
-        transform:rotate(360deg);
-    }
 
+        text-shadow:
+
+        0 0 20px #fff,
+        0 0 40px gold,
+        0 0 80px orange,
+        0 0 120px gold;
+    }
 }
 
-@keyframes rotateReverse{
+/* ================= BOUNCE ================= */
+
+@keyframes bounce{
+
+    0%{
+
+        transform:translateY(0);
+        opacity:.4;
+    }
+
+    50%{
+
+        transform:translateY(-8px);
+        opacity:1;
+    }
+
+    100%{
+
+        transform:translateY(0);
+        opacity:.4;
+    }
+}
+
+/* ================= CONTENT ================= */
+
+@keyframes fadeUp{
 
     from{
-        transform:rotate(360deg);
+
+        transform:translateY(40px);
+
+        opacity:0;
     }
 
     to{
-        transform:rotate(0deg);
-    }
 
+        transform:translateY(0);
+
+        opacity:1;
+    }
 }
+
+/* ================= MOBILE ================= */
 
 @media(max-width:768px){
 
-.loader-circle{
-    width:75px;
-    height:75px;
+.loader-title{
+
+    font-size:2.3rem;
 }
 
-.loader-inner{
-    width:50px;
-    height:50px;
-}
+.loader-subtitle{
 
-.loader-content h2{
-    font-size:28px;
+    font-size:.95rem;
 }
-
-.loader-content p{
-    font-size:14px;
-}
-
 }
