@@ -47,15 +47,22 @@ const addResult = async (req, res) => {
       hours = 0;
     }
 
-    const [year, month, day] = drawDate.split("-").map(Number);
+   const [year, month, day] = drawDate.split("-").map(Number);
 
-// Create the date using the server's local timezone (IST on your machine)
-const drawDateTime = new Date(year, month - 1, day);
-drawDateTime.setHours(hours);
-drawDateTime.setMinutes(minutes);
-drawDateTime.setSeconds(0);
-drawDateTime.setMilliseconds(0);
+// Create the date in IST irrespective of server timezone
+const istOffset = 5.5 * 60; // minutes
 
+const utcMillis = Date.UTC(
+  year,
+  month - 1,
+  day,
+  hours,
+  minutes,
+  0,
+  0
+) - istOffset * 60 * 1000;
+
+const drawDateTime = new Date(utcMillis);
 // Countdown starts 5 minutes before draw
 const visibleAt = new Date(drawDateTime.getTime() - 5 * 60 * 1000);
 
@@ -321,13 +328,20 @@ const updateResult = async (req, res) => {
 
    const [year, month, day] = drawDate.split("-").map(Number);
 
-// Create the date using the server's local timezone (IST on your machine)
-const drawDateTime = new Date(year, month - 1, day);
-drawDateTime.setHours(hours);
-drawDateTime.setMinutes(minutes);
-drawDateTime.setSeconds(0);
-drawDateTime.setMilliseconds(0);
+// Create the date in IST irrespective of server timezone
+const istOffset = 5.5 * 60; // minutes
 
+const utcMillis = Date.UTC(
+  year,
+  month - 1,
+  day,
+  hours,
+  minutes,
+  0,
+  0
+) - istOffset * 60 * 1000;
+
+const drawDateTime = new Date(utcMillis);
 // Countdown starts 5 minutes before draw
 const visibleAt = new Date(drawDateTime.getTime() - 5 * 60 * 1000);
     result.visibleAt = visibleAt;
