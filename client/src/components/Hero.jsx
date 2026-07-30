@@ -5,8 +5,8 @@ import LiveResult from "./LiveResult";
 import characterImage from "../assets/images/character (1).png";
 import prizeImage from "../assets/images/prize.png";
 
-import leftCard from "../assets/images/navimage.png";
-import rightCard from "../assets/images/navimage.png";
+import leftCard from "../assets/images/1.png";
+import rightCard from "../assets/images/2.png";
 
 function Hero() {
   
