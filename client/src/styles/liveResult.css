@@ -763,3 +763,14 @@
     }
 
 }
+/* =====================================================
+   HIDE SPARKLES ON MOBILE
+===================================================== */
+
+@media screen and (max-width: 768px) {
+    .sparkles {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+    }
+}
