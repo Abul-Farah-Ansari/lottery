@@ -71,10 +71,13 @@ function Hero() {
             <span className="hero-tag">
               LIVE RESULT DASHBOARD
             </span>
-
-          <h2 className="hero-heading">
+<h2 className="hero-heading">
   Bombay <span>Jackpot</span>
 </h2>
+
+<p className="hero-subheading">
+  Raja Rani Coupons
+</p>
 
            
 

@@ -28,7 +28,17 @@
     gap:24px;
     align-items:flex-start;
 }
+.hero-subheading {
+    margin-top: 8px;
+    margin-bottom: 15px;
 
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 600;
+
+    text-align: center;
+    letter-spacing: 1px;
+}
 /* =====================================================
    LEFT & RIGHT PANEL
 ===================================================== */
@@ -628,4 +638,45 @@ html{
         translate:0 -8px;
     }
 
+}
+/* =====================================================
+   REMOVE CHARACTER IMAGE ON MOBILE ONLY
+   ===================================================== */
+
+@media screen and (max-width: 768px) {
+
+    /* Hide the desktop character section */
+    .hero-left {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Hide the character image itself */
+    .character-card,
+    .character-placeholder,
+    .character-image {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Also hide mobile-character if it exists */
+    .mobile-character,
+    .mobile-character-img {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
 }

@@ -1,27 +1,54 @@
-.live-result{
-    width:100%;
+/* =========================================================
+   LIVE RESULT
+   ========================================================= */
+
+.live-result {
+    width: 100%;
 }
 
-.result-card{
+
+/* =========================================================
+   RESULT CARD - DESKTOP
+   ========================================================= */
+
+.result-card {
     position: relative;
+
     overflow: hidden;
+
     padding: 18px 20px;
+
     border-radius: 20px;
+
     background: #000;
+
     color: #fff;
+
     text-align: center;
+
     z-index: 1;
+
     min-height: 440px;
+
     display: flex;
+
     flex-direction: column;
+
     justify-content: center;
 }
-/* ================= Animated Border Rays ================= */
 
-.result-card::before{
+
+/* =========================================================
+   DESKTOP ANIMATED BORDER
+   ========================================================= */
+
+.result-card::before {
     content: "";
+
     position: absolute;
+
     inset: -150%;
+
     background: conic-gradient(
         transparent 0deg,
         transparent 330deg,
@@ -32,288 +59,707 @@
     );
 
     animation: borderRotate 3s linear infinite;
+
     z-index: -2;
 }
 
-/* Inner background */
-.result-card::after{
+
+/* =========================================================
+   DESKTOP INNER BACKGROUND
+   ========================================================= */
+
+.result-card::after {
     content: "";
+
     position: absolute;
+
     inset: 2px;
+
     border-radius: 18px;
-    background: rgba(20,20,20,.96);
+
+    background: rgba(20, 20, 20, 0.96);
+
     z-index: -1;
 }
 
-@keyframes borderRotate{
-    from{
+
+/* =========================================================
+   BORDER ANIMATION
+   ========================================================= */
+
+@keyframes borderRotate {
+
+    from {
         transform: rotate(0deg);
     }
-    to{
+
+    to {
         transform: rotate(360deg);
     }
+
 }
-.result-card > *:not(.border-rays){
-    position:relative;
-    z-index:2;
+
+
+/* =========================================================
+   RESULT CONTENT
+   ========================================================= */
+
+.result-card > *:not(.border-rays) {
+    position: relative;
+
+    z-index: 2;
 }
+
+
+/* =========================================================
+   LOADING / ERROR
+   ========================================================= */
+
 .loading-card,
-.error-card{
-
-    padding:45px;
-
+.error-card {
+    padding: 45px;
 }
 
-.winner-image{
-    width:100%;
-    display:block;
+
+/* =========================================================
+   WINNER IMAGE CONTAINER
+   ========================================================= */
+
+.winner-image-container {
+
+    position: relative;
+
+    width: 360px;
+
+    margin: 18px auto;
+
+    background: transparent;
+
+    border: none;
+
+    box-shadow: none;
+
+    filter: none;
+}
+
+
+/* =========================================================
+   WINNER IMAGE
+   ========================================================= */
+
+.winner-image {
+
+    width: 100%;
+
+    display: block;
+
+    background: transparent;
+
+    border: none;
+
+    box-shadow: none;
 
     animation: coinFlip 1.8s ease-in-out 1;
+
     animation-fill-mode: forwards;
 
     transform-style: preserve-3d;
+
     backface-visibility: hidden;
 }
-@keyframes coinFlip{
 
-    0%{
+
+/* =========================================================
+   WINNER IMAGE ANIMATION
+   ========================================================= */
+
+@keyframes coinFlip {
+
+    0% {
         transform: rotateY(0deg);
     }
 
-    20%{
+    20% {
         transform: rotateY(360deg);
     }
 
-    40%{
+    40% {
         transform: rotateY(720deg);
     }
 
-    60%{
+    60% {
         transform: rotateY(1080deg);
     }
 
-    80%{
+    80% {
         transform: rotateY(1440deg);
     }
 
-    100%{
+    100% {
         transform: rotateY(1800deg);
     }
 
 }
 
-.winner-heading{
 
-    font-size:18px;
+/* =========================================================
+   TICKET NUMBER
+   ========================================================= */
 
-    color:#ccc;
+.ticket-number-overlay {
 
-    margin-bottom:15px;
-
-    font-weight:500;
-
-}
-
-.winner-name{
-
-    font-size:34px;
-
-    font-weight:700;
-
-    color:#fff;
-
-    margin-bottom:20px;
-
-    text-transform:uppercase;
-
-}
-
-.divider{
-
-    width:70%;
-
-    height:1px;
-
-    background:rgba(255,255,255,.12);
-
-    margin:20px auto;
-
-}
-
-.ticket-label{
-
-    color:#bbb;
-
-    margin-bottom:10px;
-
-}
-
-.ticket-number{
-
-    font-size:42px;
-
-    color:#f7b500;
-
-    font-weight:800;
-
-    letter-spacing:3px;
-
-}
-
-.draw-info{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-top:10px;
-
-    color:#ddd;
-
-}
-
-.draw-info strong{
-
-    color:#f7b500;
-
-    font-size:20px;
-
-}
-
-@media(max-width:768px){
-
-  .result-card{
-        padding:12px 14px;
-        border-radius:16px;
-        min-height:320px;
-    }
-
-    .winner-image-container{
-        width:240px;
-        margin:12px auto;
-    }
-
-    .ticket-number-overlay{
-        top:61%;
-        font-size:44px;
-    }
-
-    .draw-info{
-        flex-direction:column;
-        gap:6px;
-        margin-top:8px;
-        font-size:14px;
-    }
-
-    .draw-info strong{
-        font-size:18px;
-    }
-
-
-
-.winner-name{
-
-    font-size:26px;
-
-}
-
-.ticket-number{
-
-    font-size:32px;
-
-}
-
-.draw-info{
-
-    flex-direction:column;
-
-    gap:8px;
-
-}
-
-}
-.winner-image-container{
-    position: relative;
-    width:360px;
-    margin:18px auto;
-}
-
-.winner-image{
-    width:100%;
-    display:block;
-}
-
-.ticket-number-overlay{
     position: absolute;
 
     left: 50%;
-    top: 62%;          /* Changed from 58% */
+
+    top: 62%;
 
     transform: translate(-50%, -50%);
 
-    width: 60%;          /* NEW */
-    text-align: center;  /* NEW */
+    width: 60%;
 
-    font-size: 66px;     /* Changed from 72px */
+    text-align: center;
+
+    font-size: 66px;
+
     font-weight: 800;
-    line-height: 1;      /* NEW */
+
+    line-height: 1;
 
     color: #f7b500;
-    letter-spacing: 2px; /* Changed from 5px */
+
+    letter-spacing: 2px;
 
     text-shadow:
-        0 2px 3px rgba(0,0,0,.7),       /* Changed */
-        0 0 8px rgba(247,181,0,.35);    /* Changed */
+        0 2px 3px rgba(0, 0, 0, 0.7),
+        0 0 8px rgba(247, 181, 0, 0.35);
 }
-@media (max-width:768px){
 
-    .winner-image-container{
-        width:280px;
-    }
 
-    .ticket-number-overlay{
-        top:61%;
-        font-size:52px;
-    }
+/* =========================================================
+   DRAW INFORMATION
+   ========================================================= */
+
+.draw-info {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-top: 10px;
+
+    color: #ddd;
 }
-.sparkles{
+
+
+.draw-info strong {
+
+    color: #f7b500;
+
+    font-size: 20px;
+}
+
+
+/* =========================================================
+   OTHER TEXT
+   ========================================================= */
+
+.winner-heading {
+
+    font-size: 18px;
+
+    color: #ccc;
+
+    margin-bottom: 15px;
+
+    font-weight: 500;
+}
+
+
+.winner-name {
+
+    font-size: 34px;
+
+    font-weight: 700;
+
+    color: #fff;
+
+    margin-bottom: 20px;
+
+    text-transform: uppercase;
+}
+
+
+.divider {
+
+    width: 70%;
+
+    height: 1px;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    margin: 20px auto;
+}
+
+
+.ticket-label {
+
+    color: #bbb;
+
+    margin-bottom: 10px;
+}
+
+
+.ticket-number {
+
+    font-size: 42px;
+
+    color: #f7b500;
+
+    font-weight: 800;
+
+    letter-spacing: 3px;
+}
+
+
+/* =========================================================
+   SPARKLES
+   ========================================================= */
+
+.sparkles {
+
     position: fixed;
+
     inset: 0;
+
     pointer-events: none;
+
     overflow: hidden;
+
     z-index: 999;
 }
 
-.sparkle{
+
+.sparkle {
+
     position: absolute;
+
     top: -40px;
+
     font-size: 18px;
+
     color: #FFD700;
+
     opacity: 0;
 
     animation: sparkleFall 3s linear infinite;
 }
 
-@keyframes sparkleFall{
 
-    0%{
-        transform: translateY(-50px) rotate(0deg) scale(.5);
-        opacity:0;
+@keyframes sparkleFall {
+
+    0% {
+
+        transform:
+            translateY(-50px)
+            rotate(0deg)
+            scale(0.5);
+
+        opacity: 0;
     }
 
-    10%{
-        opacity:1;
+    10% {
+        opacity: 1;
     }
 
-    90%{
-        opacity:1;
+    90% {
+        opacity: 1;
     }
 
-    100%{
-        transform: translateY(120vh) rotate(360deg) scale(1);
-        opacity:0;
+    100% {
+
+        transform:
+            translateY(120vh)
+            rotate(360deg)
+            scale(1);
+
+        opacity: 0;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media screen and (max-width: 768px) {
+
+    /* =====================================================
+       LIVE RESULT SECTION
+       ===================================================== */
+
+    #live.live-result {
+
+        width: 100% !important;
+
+        margin: 0 !important;
+
+        padding: 0 !important;
+
+        background: transparent !important;
+
+        border: none !important;
+
+        border-radius: 0 !important;
+
+        box-shadow: none !important;
+
+        outline: none !important;
+
+        filter: none !important;
+
+        backdrop-filter: none !important;
+    }
+
+
+    /* =====================================================
+       REMOVE RESULT CARD COMPLETELY
+       ===================================================== */
+
+    #live.live-result > .result-card {
+
+        position: static !important;
+
+        display: flex !important;
+
+        flex-direction: column !important;
+
+        align-items: center !important;
+
+        justify-content: center !important;
+
+        width: 100% !important;
+
+        height: auto !important;
+
+        min-width: 0 !important;
+
+        min-height: 0 !important;
+
+        max-width: none !important;
+
+        margin: 0 !important;
+
+        padding: 0 !important;
+
+        background: transparent !important;
+
+        border: none !important;
+
+        border-width: 0 !important;
+
+        border-style: none !important;
+
+        border-color: transparent !important;
+
+        border-radius: 0 !important;
+
+        box-shadow: none !important;
+
+        outline: none !important;
+
+        overflow: visible !important;
+
+        filter: none !important;
+
+        backdrop-filter: none !important;
+
+        -webkit-backdrop-filter: none !important;
+
+        transform: none !important;
+
+        opacity: 1 !important;
+    }
+
+
+    /* =====================================================
+       KILL PSEUDO ELEMENTS
+       ===================================================== */
+
+    #live.live-result > .result-card::before,
+    #live.live-result > .result-card::after {
+
+        content: none !important;
+
+        display: none !important;
+
+        visibility: hidden !important;
+
+        width: 0 !important;
+
+        height: 0 !important;
+
+        padding: 0 !important;
+
+        margin: 0 !important;
+
+        background: transparent !important;
+
+        border: none !important;
+
+        box-shadow: none !important;
+
+        filter: none !important;
+
+        animation: none !important;
+
+        transform: none !important;
+
+        opacity: 0 !important;
+    }
+
+
+    /* =====================================================
+       REMOVE BORDER RAYS
+       ===================================================== */
+
+    #live.live-result .border-rays {
+
+        display: none !important;
+
+        visibility: hidden !important;
+
+        width: 0 !important;
+
+        height: 0 !important;
+
+        margin: 0 !important;
+
+        padding: 0 !important;
+
+        background: transparent !important;
+
+        border: none !important;
+
+        box-shadow: none !important;
+
+        filter: none !important;
+
+        opacity: 0 !important;
+    }
+
+
+    /* =====================================================
+       WINNER CIRCLE / IMAGE
+       ===================================================== */
+
+    #live.live-result .winner-image-container {
+
+        position: relative !important;
+
+        display: block !important;
+
+        width: 280px !important;
+
+        max-width: 85vw !important;
+
+        height: auto !important;
+
+        min-height: 0 !important;
+
+        margin: 0 auto !important;
+
+        padding: 0 !important;
+
+        background: transparent !important;
+
+        border: none !important;
+
+        border-radius: 0 !important;
+
+        box-shadow: none !important;
+
+        outline: none !important;
+
+        filter: none !important;
+
+        backdrop-filter: none !important;
+
+        -webkit-backdrop-filter: none !important;
+
+        overflow: visible !important;
+    }
+
+
+    /* =====================================================
+       IMAGE ONLY
+       ===================================================== */
+
+    #live.live-result .winner-image {
+
+        display: block !important;
+
+        width: 100% !important;
+
+        height: auto !important;
+
+        margin: 0 !important;
+
+        padding: 0 !important;
+
+        background: transparent !important;
+
+        border: none !important;
+
+        border-radius: 0 !important;
+
+        box-shadow: none !important;
+
+        outline: none !important;
+
+        filter: none !important;
+
+        backdrop-filter: none !important;
+
+        -webkit-backdrop-filter: none !important;
+    }
+
+
+    /* =====================================================
+       TICKET NUMBER
+       ===================================================== */
+
+    #live.live-result .ticket-number-overlay {
+
+        position: absolute !important;
+
+        left: 50% !important;
+
+        top: 61% !important;
+
+        width: 60% !important;
+
+        transform: translate(-50%, -50%) !important;
+
+        margin: 0 !important;
+
+        padding: 0 !important;
+
+        background: transparent !important;
+
+        border: none !important;
+
+        box-shadow: none !important;
+
+        font-size: 52px !important;
+    }
+
+
+    /* =====================================================
+       DRAW TIME
+       ===================================================== */
+
+    #live.live-result .draw-info {
+
+        display: flex !important;
+
+        flex-direction: column !important;
+
+        align-items: center !important;
+
+        justify-content: center !important;
+
+        width: auto !important;
+
+        min-width: 0 !important;
+
+        height: auto !important;
+
+        margin: 8px auto 0 !important;
+
+        padding: 0 !important;
+
+        background: transparent !important;
+
+        border: none !important;
+
+        border-radius: 0 !important;
+
+        box-shadow: none !important;
+
+        outline: none !important;
+
+        filter: none !important;
+
+        backdrop-filter: none !important;
+
+        color: #ddd !important;
+
+        gap: 6px !important;
+    }
+
+
+    #live.live-result .draw-info strong {
+
+        font-size: 18px !important;
+
+        margin: 0 !important;
+
+        padding: 0 !important;
+
+        background: transparent !important;
+
+        border: none !important;
+
+        box-shadow: none !important;
+    }
+
+
+    /* =====================================================
+       LOADING / ERROR
+       ===================================================== */
+
+    #live.live-result .loading-card,
+    #live.live-result .error-card {
+
+        width: auto !important;
+
+        min-height: 0 !important;
+
+        margin: 0 !important;
+
+        padding: 20px !important;
+
+        background: transparent !important;
+
+        border: none !important;
+
+        border-radius: 0 !important;
+
+        box-shadow: none !important;
+
+        filter: none !important;
+
+        backdrop-filter: none !important;
+    }
+
+
+    /* =====================================================
+       OTHER MOBILE TEXT
+       ===================================================== */
+
+    #live.live-result .winner-name {
+
+        font-size: 26px;
+    }
+
+
+    #live.live-result .ticket-number {
+
+        font-size: 32px;
     }
 
 }
