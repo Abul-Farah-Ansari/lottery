@@ -773,4 +773,49 @@
         visibility: hidden !important;
         opacity: 0 !important;
     }
+    .sparkle {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+    }
+}
+/* =====================================================
+   COMPACT MOBILE LIVE RESULT
+===================================================== */
+
+@media screen and (max-width: 768px) {
+
+    #live.live-result {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* Smaller winner circle */
+    #live.live-result .winner-image-container {
+        width: 190px !important;
+        max-width: 190px !important;
+        margin: 0 auto !important;
+    }
+
+    #live.live-result .winner-image {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    /* Smaller ticket number */
+    #live.live-result .ticket-number-overlay {
+        font-size: 38px !important;
+        top: 61% !important;
+    }
+
+    /* Compact draw information */
+    #live.live-result .draw-info {
+        margin: 3px auto 0 !important;
+        gap: 2px !important;
+        font-size: 13px !important;
+    }
+
+    #live.live-result .draw-info strong {
+        font-size: 15px !important;
+    }
 }
