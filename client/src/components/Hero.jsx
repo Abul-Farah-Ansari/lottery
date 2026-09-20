@@ -76,7 +76,8 @@ function Hero() {
 </h2>
 
 <p className="hero-subheading">
-  Raja Rani Coupons
+  <span className="raja-text">Raja</span>{" "}
+  <span className="rani-text">Rani</span>
 </p>
 
            

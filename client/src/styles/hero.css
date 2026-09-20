@@ -768,3 +768,10 @@ html {
         padding: 0 !important;
     }
 }
+.raja-text {
+    color: red;
+}
+
+.rani-text {
+    color: #FFD700;
+}
