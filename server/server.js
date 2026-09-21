@@ -19,7 +19,9 @@ app.use(
     origin: [
       "http://localhost:5173",
       "https://lottery-5wjp.vercel.app",
-      "https://bombayjackpotrajarani.in"
+      "https://bombay-jackpot-4.vercel.app",
+      "https://bombayjackpotrajarani.in",
+      "https://www.bombayjackpotrajarani.in",
     ],
     credentials: true,
   })
