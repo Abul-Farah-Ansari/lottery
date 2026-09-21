@@ -4,7 +4,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-console.log("SERVER BREVO_API_KEY:", process.env.BREVO_API_KEY);
+
 
 const resultRoutes = require("./routes/resultRoutes");
 const authRoutes = require("./routes/authRoutes");
@@ -19,6 +19,7 @@ app.use(
     origin: [
       "http://localhost:5173",
       "https://lottery-5wjp.vercel.app",
+      "https://bombayjackpotrajarani.in"
     ],
     credentials: true,
   })
