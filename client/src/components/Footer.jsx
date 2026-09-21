@@ -95,9 +95,24 @@ function Footer() {
 
       </div>
 
+      {/* ================= Footer Bottom ================= */}
+
       <div className="footer-bottom">
 
-        © {new Date().getFullYear()} Bombay Jackpot. All Rights Reserved.
+        <div>
+          © {new Date().getFullYear()} Bombay Jackpot. All Rights Reserved.
+        </div>
+
+        <div className="footer-credit">
+          Made with <span className="heart">❤️</span> by{" "}
+          <a
+            href={"https://www." + "fastack.co.in/"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Fastack
+          </a>
+        </div>
 
       </div>
 
