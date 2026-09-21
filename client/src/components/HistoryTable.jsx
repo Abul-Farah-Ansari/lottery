@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
 import "../styles/history.css";
+import characterImage from "../assets/images/character (1).png";
 
 export default function HistoryTable() {
   const [date, setDate] = useState("");
@@ -41,66 +42,75 @@ export default function HistoryTable() {
 
   return (
     <section className="history" id="history">
-  <div className="history-content">
+      <div className="history-content">
 
-      <h2>Winning Results</h2>
+        <h2>Winning Results</h2>
 
-      <div className="search-box">
+        <div className="search-box">
 
-        <input
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-        />
+          <input
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />
 
-        <button onClick={searchResult}>
-          Search
-        </button>
+          <button onClick={searchResult}>
+            Search
+          </button>
 
-      </div>
+        </div>
 
-      <div className="table-box">
+        <div className="table-box">
 
-        <table>
+          <table>
 
-          <thead>
-            <tr>
-              <th>Draw Time</th>
-              <th>Ticket Number</th>
-            </tr>
-          </thead>
-
-          <tbody>
-
-            {loading ? (
-
+            <thead>
               <tr>
-                <td colSpan="2">Loading...</td>
+                <th>Draw Time</th>
+                <th>Ticket Number</th>
               </tr>
+            </thead>
 
-            ) : results.length > 0 ? (
+            <tbody>
 
-              results.map((item) => (
-                <tr key={item._id}>
-                  <td>{item.drawTime}</td>
-                  <td>{item.ticketNumber}</td>
+              {loading ? (
+
+                <tr>
+                  <td colSpan="2">Loading...</td>
                 </tr>
-              ))
 
-            ) : (
+              ) : results.length > 0 ? (
 
-              <tr>
-                <td colSpan="2">No Results Found</td>
-              </tr>
+                results.map((item) => (
+                  <tr key={item._id}>
+                    <td>{item.drawTime}</td>
+                    <td>{item.ticketNumber}</td>
+                  </tr>
+                ))
 
-            )}
+              ) : (
 
-          </tbody>
+                <tr>
+                  <td colSpan="2">No Results Found</td>
+                </tr>
 
-        </table>
+              )}
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+        {/* Character below history table */}
+        <div className="history-character">
+          <img
+            src={characterImage}
+            alt="Bombay Jackpot Character"
+          />
+        </div>
 
       </div>
-</div>
     </section>
   );
 }

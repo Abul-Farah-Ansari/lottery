@@ -775,3 +775,7 @@ html {
 .rani-text {
     color: #FFD700;
 }
+.raja-text,
+.rani-text {
+  font-weight: 900;
+}
