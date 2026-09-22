@@ -355,7 +355,12 @@ const [selectedDate, setSelectedDate] = useState(getTodayIST());
 
                    
 
-                    <td>{result.ticketNumber}</td>
+                    <td>
+  {result.ticketNumber}
+  {result.hasX && (
+    <span style={{ marginLeft: "2px" }}>X</span>
+  )}
+</td>
 
                     <td>
                       {new Date(

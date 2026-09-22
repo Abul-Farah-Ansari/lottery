@@ -141,7 +141,8 @@ function LiveResult() {
 
             {/* Ticket Number */}
             <div className="ticket-number-overlay">
-              {result.data.ticketNumber}X
+              {result.data.ticketNumber}
+              {result.data.hasX ? "X" : ""}
             </div>
           </div>
 

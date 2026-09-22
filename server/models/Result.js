@@ -8,6 +8,12 @@ const resultSchema = new mongoose.Schema(
       trim: true,
     },
 
+    // Whether the ticket number should display X
+    hasX: {
+      type: Boolean,
+      default: false,
+    },
+
     drawDate: {
       type: String,
       required: true,

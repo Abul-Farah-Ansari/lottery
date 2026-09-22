@@ -4,22 +4,31 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-
-
 const resultRoutes = require("./routes/resultRoutes");
 const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 
+// ==========================
 // Middleware
+// ==========================
+
 app.use(express.json());
+
+// ==========================
+// CORS
+// ==========================
 
 app.use(
   cors({
     origin: [
+      // Local development
       "http://localhost:5173",
-      "https://lottery-5wjp.vercel.app",
-      "https://bombay-jackpot-4.vercel.app",
+
+      // New Vercel frontend
+      "https://lottery-new2.vercel.app",
+
+      // Main domain
       "https://bombayjackpotrajarani.in",
       "https://www.bombayjackpotrajarani.in",
     ],
@@ -27,16 +36,25 @@ app.use(
   })
 );
 
+// ==========================
 // Routes
+// ==========================
+
 app.use("/api/auth", authRoutes);
 app.use("/api/result", resultRoutes);
 
+// ==========================
 // Home Route
+// ==========================
+
 app.get("/", (req, res) => {
   res.send("Lottery Backend Running...");
 });
 
+// ==========================
 // MongoDB Connection
+// ==========================
+
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
@@ -46,12 +64,29 @@ mongoose
     console.error("❌ MongoDB Error:", err);
   });
 
+// ==========================
 // Start Server
+// ==========================
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log("process.env.TZ =", process.env.TZ);
-console.log("Intl TZ =", Intl.DateTimeFormat().resolvedOptions().timeZone);
-console.log("Offset =", new Date().getTimezoneOffset());
-  console.log(`🚀 Server running on port ${PORT}`);
+  console.log(
+    "process.env.TZ =",
+    process.env.TZ
+  );
+
+  console.log(
+    "Intl TZ =",
+    Intl.DateTimeFormat().resolvedOptions().timeZone
+  );
+
+  console.log(
+    "Offset =",
+    new Date().getTimezoneOffset()
+  );
+
+  console.log(
+    `🚀 Server running on port ${PORT}`
+  );
 });

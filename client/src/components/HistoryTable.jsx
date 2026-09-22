@@ -8,12 +8,15 @@ export default function HistoryTable() {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // Fetch results for a specific date
+  // Fetch all results for a specific date
   const fetchResults = async (selectedDate) => {
     try {
       setLoading(true);
 
-      const res = await api.get(`/result/history?date=${selectedDate}`);
+      const res = await api.get(
+        `/result/history?date=${selectedDate}&page=1&limit=1000`
+      );
+
       setResults(res.data.data || []);
     } catch (err) {
       console.error(err);
@@ -25,7 +28,10 @@ export default function HistoryTable() {
 
   // Load today's data automatically
   useEffect(() => {
-    const today = new Date().toISOString().split("T")[0];
+    const today = new Date().toLocaleDateString("en-CA", {
+      timeZone: "Asia/Kolkata",
+    });
+
     setDate(today);
     fetchResults(today);
   }, []);
@@ -76,22 +82,34 @@ export default function HistoryTable() {
               {loading ? (
 
                 <tr>
-                  <td colSpan="2">Loading...</td>
+                  <td colSpan="2">
+                    Loading...
+                  </td>
                 </tr>
 
               ) : results.length > 0 ? (
 
                 results.map((item) => (
                   <tr key={item._id}>
-                    <td>{item.drawTime}</td>
-                    <td>{item.ticketNumber}</td>
+
+                    <td>
+                      {item.drawTime}
+                    </td>
+
+                    <td>
+                      {item.ticketNumber}
+                      {item.hasX ? "X" : ""}
+                    </td>
+
                   </tr>
                 ))
 
               ) : (
 
                 <tr>
-                  <td colSpan="2">No Results Found</td>
+                  <td colSpan="2">
+                    No Results Found
+                  </td>
                 </tr>
 
               )}
