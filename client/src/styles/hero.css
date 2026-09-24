@@ -658,25 +658,17 @@ html {
         position: relative;
     }
 
-    .mobile-card {
-        position: absolute;
-
-        top: 20px;
-
-        width: 75px;
-
-        z-index: 0;
-
-        pointer-events: none;
-
-        opacity: 0.95;
-
-        animation: cardFloat 3s ease-in-out infinite;
-
-        filter: drop-shadow(
-            0 0 12px rgba(255, 215, 0, 0.6)
-        );
-    }
+  .mobile-card {
+    position: absolute;
+    top: 20px;
+    width: 75px;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.95;
+    filter: drop-shadow(
+        0 0 12px rgba(255, 215, 0, 0.6)
+    );
+}
 
     .mobile-card.left {
         left: -10px;
@@ -695,17 +687,7 @@ html {
    MOBILE CARD FLOAT ANIMATION
 ===================================================== */
 
-@keyframes cardFloat {
 
-    0%,
-    100% {
-        translate: 0 0;
-    }
-
-    50% {
-        translate: 0 -8px;
-    }
-}
 
 /* =====================================================
    REMOVE CHARACTER IMAGE ON MOBILE ONLY
