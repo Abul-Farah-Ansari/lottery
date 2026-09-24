@@ -8,11 +8,21 @@ function Footer() {
 
         {/* ================= Brand ================= */}
 
-        <div className="footer-column">
+        <div className="footer-column footer-brand">
 
-          <h2 className="footer-logo">
-            🎰 Bombay Jackpot
-          </h2>
+          <a
+            href="/"
+            className="footer-logo-link"
+            aria-label="Bombay Jackpot Raja Rani home"
+          >
+            <img
+              src="/logo.png"
+              alt="Bombay Jackpot Raja Rani"
+              className="footer-logo"
+              width="180"
+              height="85"
+            />
+          </a>
 
           <p>
             Bombay Jackpot is your trusted destination for live lottery

@@ -5,9 +5,7 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  const closeMenu = () => {
-    setMenuOpen(false);
-  };
+  const closeMenu = () => setMenuOpen(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,36 +35,23 @@ function Navbar() {
       >
         <div className="nav-container">
 
-          {/* ==========================
-              Logo / Brand
-          ========================== */}
+          {/* LOGO */}
           <a
             href="/"
             className="logo"
             onClick={closeMenu}
             aria-label="Bombay Jackpot Raja Rani home"
           >
-            <span
-              className="logo-icon"
-              aria-hidden="true"
-            >
-              🎰
-            </span>
-
-            <div className="logo-text">
-              <span className="logo-title">
-                Bombay Jackpot
-              </span>
-
-              <span className="logo-subtitle">
-                Live Lottery Results
-              </span>
-            </div>
+            <img
+              src="/logo.png"
+              alt="Bombay Jackpot Raja Rani"
+              className="navbar-logo"
+              width="150"
+              height="70"
+            />
           </a>
 
-          {/* ==========================
-              Navigation Links
-          ========================== */}
+          {/* NAVIGATION */}
           <div
             id="main-navigation"
             className={`nav-links ${menuOpen ? "active" : ""}`}
@@ -94,9 +79,7 @@ function Navbar() {
             </a>
           </div>
 
-          {/* ==========================
-              Mobile Menu Button
-          ========================== */}
+          {/* MOBILE MENU */}
           <button
             type="button"
             className={`hamburger ${menuOpen ? "active" : ""}`}
@@ -113,13 +96,9 @@ function Navbar() {
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
           </button>
-
         </div>
       </nav>
 
-      {/* ==========================
-          Mobile Overlay
-      ========================== */}
       {menuOpen && (
         <div
           className="menu-overlay"

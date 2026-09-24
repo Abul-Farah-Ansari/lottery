@@ -185,3 +185,31 @@ td:last-child {
 .history-description {
   display: none !important;
 }
+/* =========================
+   FOOTER LOGO
+========================= */
+
+.footer-logo-link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    margin-bottom: 12px;
+}
+
+.footer-logo {
+    width: 180px;
+    height: 85px;
+    object-fit: contain;
+    display: block;
+}
+
+
+/* Mobile */
+@media (max-width: 768px) {
+
+    .footer-logo {
+        width: 150px;
+        height: 75px;
+    }
+
+}

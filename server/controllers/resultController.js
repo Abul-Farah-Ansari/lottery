@@ -201,19 +201,31 @@ const getResultHistory = async (req, res) => {
 
     const now = new Date();
 
+    // ======================================
+    // IMPORTANT:
+    // visibleAt = draw time - 5 minutes
+    //
+    // We do NOT want history to appear
+    // when countdown starts.
+    //
+    // History should appear only when the
+    // actual draw time has arrived.
+    // ======================================
+
+    const historyCutoff = new Date(
+      now.getTime() - 5 * 60 * 1000
+    );
+
     const query = {
       drawDate: date,
       visibleAt: {
-        $lte: now,
+        $lte: historyCutoff,
       },
     };
 
-    const totalResults =
-      await Result.countDocuments(query);
+    const totalResults = await Result.countDocuments(query);
 
-    const totalPages = Math.ceil(
-      totalResults / limit
-    );
+    const totalPages = Math.ceil(totalResults / limit);
 
     const results = await Result.find(query)
       .sort({ visibleAt: 1 })
@@ -232,14 +244,16 @@ const getResultHistory = async (req, res) => {
         hasPrevPage: page > 1,
       },
     });
+
   } catch (error) {
+    console.error("Get Result History Error:", error);
+
     return res.status(500).json({
       success: false,
       message: error.message,
     });
   }
 };
-
 // ======================================
 // Get Today's Results (Admin)
 // ======================================

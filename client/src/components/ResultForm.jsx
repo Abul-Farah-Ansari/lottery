@@ -80,8 +80,8 @@ function ResultForm({
       if (
         value === "" ||
         (/^\d+$/.test(value) &&
-          Number(value) >= 1 &&
-          Number(value) <= 10)
+          Number(value) >= 0 &&
+          Number(value) <= 9)
       ) {
         setFormData((prev) => ({
           ...prev,
@@ -189,8 +189,8 @@ function ResultForm({
           placeholder="Ticket Number (1-10)"
           value={formData.ticketNumber}
           onChange={handleChange}
-          min="1"
-          max="10"
+          min="0"
+          max="9"
           required
         />
 

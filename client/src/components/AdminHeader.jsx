@@ -10,13 +10,34 @@ function AdminHeader({
 }) {
   return (
     <header className="admin-header">
+
+      {/* =========================
+          HEADER LEFT / BRAND
+      ========================== */}
       <div className="header-left">
-        <h1>Lottery Admin</h1>
-        <span>Management System</span>
+
+        <img
+          src="/logo.png"
+          alt="Bombay Jackpot Raja Rani"
+          className="admin-logo"
+          width="90"
+          height="70"
+        />
+
+        <div className="header-brand-text">
+          <h1>Lottery Admin</h1>
+          <span>Management System</span>
+        </div>
+
       </div>
 
+      {/* =========================
+          HEADER CENTER / NAVIGATION
+      ========================== */}
       <div className="header-center">
+
         <button
+          type="button"
           className={
             activeTab === "dashboard"
               ? "nav-btn active"
@@ -29,6 +50,7 @@ function AdminHeader({
         </button>
 
         <button
+          type="button"
           className={
             activeTab === "results"
               ? "nav-btn active"
@@ -39,17 +61,25 @@ function AdminHeader({
           <FaListAlt className="nav-icon" />
           Results
         </button>
+
       </div>
 
+      {/* =========================
+          HEADER RIGHT / LOGOUT
+      ========================== */}
       <div className="header-right">
+
         <button
+          type="button"
           className="logout-btn"
           onClick={onLogout}
         >
           <FaSignOutAlt />
-          Logout
+          <span>Logout</span>
         </button>
+
       </div>
+
     </header>
   );
 }
