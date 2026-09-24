@@ -14,6 +14,7 @@
     margin-top: 0;
 }
 
+
 /* =====================================================
    MAIN CONTAINER
 ===================================================== */
@@ -28,6 +29,7 @@
     gap: 24px;
     align-items: flex-start;
 }
+
 
 /* =====================================================
    HERO SUBHEADING
@@ -45,6 +47,7 @@
     letter-spacing: 1px;
 }
 
+
 /* =====================================================
    LEFT & RIGHT PANEL
 ===================================================== */
@@ -54,6 +57,7 @@
     display: flex;
     flex-direction: column;
 }
+
 
 /* =====================================================
    CHARACTER CARD
@@ -65,6 +69,7 @@
     height: 600px;
 }
 
+
 .character-placeholder {
     height: 480px;
 
@@ -73,20 +78,25 @@
     align-items: flex-end;
 }
 
+
 .character-image {
     width: 290px;
     max-width: 100%;
     height: auto;
     object-fit: contain;
 
-    filter: drop-shadow(0 18px 35px rgba(0, 0, 0, 0.45));
+    filter: drop-shadow(
+        0 18px 35px rgba(0, 0, 0, 0.45)
+    );
 
     transition: 0.35s ease;
 }
 
+
 .character-image:hover {
     transform: translateY(-10px) scale(1.04);
 }
+
 
 /* =====================================================
    FEATURE CARD
@@ -106,6 +116,7 @@
     backdrop-filter: blur(15px);
 }
 
+
 .feature-card h3 {
     color: #FFD700;
 
@@ -116,6 +127,7 @@
     font-weight: 700;
 }
 
+
 .feature-card ul {
     list-style: none;
 
@@ -123,6 +135,7 @@
 
     margin: 0;
 }
+
 
 .feature-card li {
     color: #dddddd;
@@ -134,9 +147,11 @@
     font-size: 15px;
 }
 
+
 .feature-card li:last-child {
     border: none;
 }
+
 
 /* =====================================================
    CENTER PANEL
@@ -149,6 +164,7 @@
 
     align-items: center;
 }
+
 
 /* =====================================================
    HERO TITLE
@@ -176,6 +192,7 @@
     margin-bottom: 15px;
 }
 
+
 .hero-title {
     position: relative;
 
@@ -183,6 +200,7 @@
 
     text-align: center;
 }
+
 
 .hero-title::before {
     content: "";
@@ -212,6 +230,36 @@
     pointer-events: none;
 }
 
+
+/* =====================================================
+   CURRENT H1
+===================================================== */
+
+.hero-title h1 {
+    position: relative;
+
+    color: #ffffff;
+
+    font-size: 60px;
+
+    font-weight: 900;
+
+    line-height: 1.05;
+
+    margin: 0;
+
+    text-shadow:
+        0 0 8px rgba(255, 215, 0, 0.6),
+        0 0 18px rgba(255, 215, 0, 0.45),
+        0 0 35px rgba(255, 215, 0, 0.3);
+}
+
+
+.hero-title h1 span {
+    color: #FFD700;
+}
+
+
 .hero-title h2 {
     position: relative;
 
@@ -223,15 +271,14 @@
 
     line-height: 1.05;
 
-    text-shadow:
-        0 0 8px rgba(255, 215, 0, 0.6),
-        0 0 18px rgba(255, 215, 0, 0.45),
-        0 0 35px rgba(255, 215, 0, 0.3);
+    margin: 0;
 }
+
 
 .hero-title h2 span {
     color: #FFD700;
 }
+
 
 .hero-title p {
     margin-top: 10px;
@@ -242,6 +289,7 @@
 
     letter-spacing: 1px;
 }
+
 
 /* =====================================================
    RESULT CARD
@@ -263,6 +311,7 @@
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
 }
 
+
 /* =====================================================
    RESULT PLACEHOLDER
 ===================================================== */
@@ -275,6 +324,7 @@
 
     font-weight: 600;
 }
+
 
 /* =====================================================
    PRIZE CARD
@@ -290,6 +340,7 @@
     height: 600px;
 }
 
+
 .prize-card h2 {
     color: #FFD700;
 
@@ -299,6 +350,7 @@
 
     margin-bottom: 22px;
 }
+
 
 .prize-placeholder {
     height: 480px;
@@ -310,6 +362,7 @@
     align-items: center;
 }
 
+
 .prize-image {
     width: 270px;
 
@@ -319,14 +372,18 @@
 
     object-fit: contain;
 
-    filter: drop-shadow(0 18px 35px rgba(0, 0, 0, 0.45));
+    filter: drop-shadow(
+        0 18px 35px rgba(0, 0, 0, 0.45)
+    );
 
     transition: 0.35s ease;
 }
 
+
 .prize-image:hover {
     transform: scale(1.05);
 }
+
 
 .prize-card p {
     margin-top: 20px;
@@ -339,6 +396,7 @@
 
     text-align: center;
 }
+
 
 .prize-card small {
     margin-top: 10px;
@@ -354,6 +412,7 @@
     max-width: 260px;
 }
 
+
 /* =====================================================
    COMMON
 ===================================================== */
@@ -365,6 +424,7 @@
     pointer-events: none;
 }
 
+
 .character-card,
 .prize-card,
 .dashboard-box,
@@ -372,13 +432,16 @@
     position: relative;
 }
 
+
 .mobile-character {
     display: none;
 }
 
+
 /* =====================================================
    RESPONSIVE DESIGN
 ===================================================== */
+
 
 /* ====================== Large Laptop ====================== */
 
@@ -406,6 +469,7 @@
         height: 430px;
     }
 }
+
 
 /* ====================== Tablet ====================== */
 
@@ -458,61 +522,140 @@
     }
 }
 
-/* ====================== Mobile ====================== */
+
+/* =====================================================
+   MOBILE
+===================================================== */
 
 @media (max-width: 768px) {
 
     .hero {
+        position: relative;
+
+        width: 100%;
+
         padding: 15px 10px;
+
+        margin: 0;
+
+        overflow: hidden;
     }
+
 
     .hero-container {
+        position: relative;
+
         display: block;
 
-        max-width: 100%;
-    }
-
-    .hero-left,
-    .hero-right {
-        display: none;
-    }
-
-    .hero-center {
         width: 100%;
+
+        max-width: 100%;
+
+        margin: 0;
 
         padding: 0;
     }
 
-    .hero-title {
-        margin-bottom: 15px;
+
+    /* Hide desktop side panels */
+
+    .hero-left,
+    .hero-right {
+        display: none !important;
     }
 
+
+    /* Center panel */
+
+    .hero-center {
+        position: relative;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        width: 100%;
+
+        min-width: 0;
+
+        padding: 0;
+
+        margin: 0;
+    }
+
+
+    /* =================================================
+       MOBILE TITLE
+    ================================================= */
+
+    .hero-title {
+        position: relative;
+
+        width: 100%;
+
+        margin: 0 0 15px;
+
+        text-align: center;
+
+        z-index: 2;
+    }
+
+
     .hero-tag {
+        position: relative;
+
+        z-index: 3;
+
         font-size: 12px;
 
         padding: 8px 18px;
 
         letter-spacing: 2px;
+
+        margin-bottom: 12px;
     }
 
+
     .hero-title h1 {
+        position: relative;
+
+        z-index: 3;
+
         font-size: 38px;
 
         line-height: 1.15;
+
+        margin: 0;
     }
 
+
     .hero-title p {
+        position: relative;
+
+        z-index: 3;
+
         font-size: 15px;
 
         margin-top: 8px;
     }
 
+
     /* =================================================
-       REMOVE OUTER LIVE RESULT CARD ON MOBILE
-       ================================================= */
+       REMOVE OUTER RESULT BOX
+    ================================================= */
 
     .dashboard-box {
+        position: relative;
+
+        z-index: 2;
+
         width: 100% !important;
+
+        min-width: 0 !important;
+
+        min-height: 0 !important;
 
         margin: 0 !important;
 
@@ -533,7 +676,10 @@
         overflow: visible !important;
     }
 
-    /* Mobile Character */
+
+    /* =================================================
+       MOBILE CHARACTER
+    ================================================= */
 
     .mobile-character {
         display: flex;
@@ -546,6 +692,7 @@
 
         background: #000;
     }
+
 
     .mobile-character-img {
         width: 260px;
@@ -562,32 +709,63 @@
     }
 }
 
-/* ====================== Small Mobile ====================== */
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
 
 @media (max-width: 480px) {
 
     .hero {
-        padding: 12px;
+        padding: 12px 10px;
+
+        margin: 0;
+
+        overflow: hidden;
     }
+
+
+    .hero-container {
+        width: 100%;
+
+        margin: 0;
+
+        padding: 0;
+    }
+
+
+    .hero-title {
+        margin-bottom: 10px;
+    }
+
 
     .hero-title h1 {
         font-size: 32px;
+
+        line-height: 1.1;
     }
+
 
     .hero-title p {
         font-size: 14px;
+
+        margin-top: 6px;
     }
+
 
     .hero-tag {
         font-size: 10px;
 
         padding: 7px 15px;
+
+        margin-bottom: 10px;
     }
 
-    /* Keep result container completely invisible */
 
     .dashboard-box {
         width: 100% !important;
+
+        min-height: 0 !important;
 
         margin: 0 !important;
 
@@ -608,14 +786,17 @@
         overflow: visible !important;
     }
 
+
     .mobile-character {
         padding: 25px 15px;
     }
+
 
     .mobile-character-img {
         width: 220px;
     }
 }
+
 
 /* =====================================================
    SMOOTH SCROLL
@@ -625,8 +806,9 @@ html {
     scroll-behavior: smooth;
 }
 
+
 /* =====================================================
-   MOBILE HEADING
+   MOBILE HEADING FALLBACK
 ===================================================== */
 
 @media (max-width: 768px) {
@@ -636,6 +818,7 @@ html {
     }
 }
 
+
 /* =====================================================
    MOBILE CARDS
 ===================================================== */
@@ -644,49 +827,96 @@ html {
     display: none;
 }
 
+
 /* =====================================================
-   MOBILE ONLY
+   MOBILE PLAYING CARDS
 ===================================================== */
 
 @media (max-width: 768px) {
 
     .mobile-cards {
+        position: absolute;
+
+        top: 0;
+        left: 0;
+
         display: block;
+
+        width: 100%;
+
+        height: 190px;
+
+        margin: 0;
+        padding: 0;
+
+        pointer-events: none;
+
+        z-index: 1;
+
+        overflow: visible;
     }
 
-    .hero {
-        position: relative;
+
+    .mobile-card {
+        position: absolute;
+
+        display: block;
+
+        top: 10px;
+
+        width: 75px;
+
+        height: 125px;
+
+        max-width: 75px;
+        max-height: 125px;
+
+        object-fit: contain;
+
+        object-position: center;
+
+        margin: 0;
+        padding: 0;
+
+        z-index: 1;
+
+        pointer-events: none;
+
+        opacity: 0.95;
+
+        filter: drop-shadow(
+            0 0 12px rgba(255, 215, 0, 0.6)
+        );
     }
 
-  .mobile-card {
-    position: absolute;
-    top: 20px;
-    width: 75px;
-    z-index: 0;
-    pointer-events: none;
-    opacity: 0.95;
-    filter: drop-shadow(
-        0 0 12px rgba(255, 215, 0, 0.6)
-    );
-}
 
     .mobile-card.left {
-        left: -10px;
+        left: -8px;
 
         transform: rotate(-18deg);
+
+        transform-origin: center center;
     }
+
 
     .mobile-card.right {
-        right: -10px;
+        right: -8px;
 
         transform: rotate(18deg);
+
+        transform-origin: center center;
+    }
+
+
+    /* Keep actual content above cards */
+
+    .hero-title,
+    .dashboard-box {
+        position: relative;
+
+        z-index: 2;
     }
 }
-
-/* =====================================================
-   MOBILE CARD FLOAT ANIMATION
-===================================================== */
-
 
 
 /* =====================================================
@@ -694,8 +924,6 @@ html {
 ===================================================== */
 
 @media screen and (max-width: 768px) {
-
-    /* Hide desktop character section */
 
     .hero-left {
         display: none !important;
@@ -711,7 +939,6 @@ html {
         padding: 0 !important;
     }
 
-    /* Hide character image itself */
 
     .character-card,
     .character-placeholder,
@@ -731,7 +958,6 @@ html {
         padding: 0 !important;
     }
 
-    /* Also hide mobile-character if it exists */
 
     .mobile-character,
     .mobile-character-img {
@@ -750,14 +976,23 @@ html {
         padding: 0 !important;
     }
 }
+
+
+/* =====================================================
+   RAJA / RANI COLORS
+===================================================== */
+
 .raja-text {
     color: red;
 }
 
+
 .rani-text {
     color: #FFD700;
 }
+
+
 .raja-text,
 .rani-text {
-  font-weight: 900;
+    font-weight: 900;
 }
