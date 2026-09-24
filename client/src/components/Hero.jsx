@@ -2,101 +2,99 @@ import "../styles/hero.css";
 
 import LiveResult from "./LiveResult";
 
-import characterImage from "../assets/images/character (1).png";
-import prizeImage from "../assets/images/prize.png";
+import characterImage from "../assets/images/new-character-(1).jpg";
+import prizeImage from "../assets/images/new-prize.jpg";
 
 import leftCard from "../assets/images/1.jpg";
 import rightCard from "../assets/images/2.jpg";
 
 function Hero() {
-  
-
   return (
-    <section className="hero">
+    <section className="hero" aria-labelledby="hero-heading">
       <div className="hero-container">
-        <div className="mobile-cards">
 
-  <img
-    src={leftCard}
-    alt="Left Card"
-    className="mobile-card left"
-  />
+        {/* ================= MOBILE DECORATIVE CARDS ================= */}
+        <div className="mobile-cards" aria-hidden="true">
+          <img
+            src={leftCard}
+            alt=""
+            width="164"
+            height="254"
+            className="mobile-card left"
+          />
 
-  <img
-    src={rightCard}
-    alt="Right Card"
-    className="mobile-card right"
-  />
-
-</div>
+          <img
+            src={rightCard}
+            alt=""
+            className="mobile-card right"
+          />
+        </div>
 
         {/* ================= LEFT ================= */}
-
         <div className="hero-left">
-
           <div className="character-card">
 
             <div className="character-placeholder">
               <img
-  src={characterImage}
-  alt="Lottery Character"
-  className="character-image"
-/>
+                src={characterImage}
+                alt="Bombay Jackpot Raja Rani lottery character"
+                width="800"
+                height="1000"
+                className="character-image"
+              />
             </div>
 
             <div className="feature-card">
-
-              <h3>Why Play With Us?</h3>
+              <h2>Why Check Bombay Jackpot Results?</h2>
 
               <ul>
                 <li>⚡ Fast Live Results</li>
-                <li>🗓 Trusted Daily Draws</li>
-                <li>🛡 100% Secure</li>
-                <li>🔔 Instant Updates</li>
-                <li>⭐ Premium Experience</li>
+                <li>🗓 Daily Draw Results</li>
+                <li>🔔 Instant Result Updates</li>
+                <li>⭐ Simple Result Checking</li>
               </ul>
-
             </div>
 
           </div>
-
         </div>
 
         {/* ================= CENTER ================= */}
-
         <div className="hero-center">
 
           <div className="hero-title">
 
             <span className="hero-tag">
-              LIVE RESULT DASHBOARD
+              LIVE LOTTERY RESULTS
             </span>
-<h2 className="hero-heading">
-  Bombay <span>Jackpot</span>
-</h2>
 
-<p className="hero-subheading">
-  <span className="raja-text">Raja</span>{" "}
-  <span className="rani-text">Rani</span>
-</p>
+            <h1 id="hero-heading" className="hero-heading">
+              Bombay <span>Jackpot</span>
+            </h1>
 
-           
+            <p className="hero-subheading">
+              <span className="raja-text">Raja</span>{" "}
+              <span className="rani-text">Rani</span>
+            </p>
+
+            <p className="hero-description">
+              Check Bombay Jackpot Raja Rani live lottery results,
+              winning ticket numbers, previous results and upcoming
+              draw timings.
+            </p>
 
           </div>
 
-          {/* Live Result (Countdown / Winner) */}
-
-          <div className="dashboard-box">
+          {/* ================= LIVE RESULT ================= */}
+          <div
+            className="dashboard-box"
+            aria-label="Bombay Jackpot Raja Rani live lottery result"
+          >
             <LiveResult />
           </div>
 
-          {/* Buttons */}
-
-        
         </div>
 
         {/* ================= RIGHT ================= */}
-
         <div className="hero-right">
 
           <div className="prize-card">
@@ -105,18 +103,20 @@ function Hero() {
 
             <div className="prize-placeholder">
               <img
-  src={prizeImage}
-  alt="Today's Prize"
-  className="prize-image"
-/>
+                src={prizeImage}
+                alt="Bombay Jackpot Raja Rani daily lottery prize"
+                width="1000"
+                height="850"
+                className="prize-image"
+              />
             </div>
 
             <p>
-              Win Big Every Day
+              Check Today's Winning Result
             </p>
 
             <small>
-              Your Lucky Number Can Change Your Life!
+              View the latest winning ticket number and draw result.
             </small>
 
           </div>

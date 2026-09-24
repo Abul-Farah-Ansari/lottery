@@ -33,5 +33,5 @@ const resultSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-
+resultSchema.index({ visibleAt: -1 });
 module.exports = mongoose.model("Result", resultSchema);

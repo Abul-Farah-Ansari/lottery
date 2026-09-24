@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Confetti from "react-confetti";
 import api from "../services/api";
 import "../styles/liveResult.css";
-import winnerBadge from "../assets/images/winner-badge.png";
+import winnerBadge from "../assets/images/new-winner-badge.png";
 
 function LiveResult() {
   const [result, setResult] = useState(null);
@@ -17,7 +17,6 @@ function LiveResult() {
   const fetchLiveResult = async () => {
     try {
       const response = await api.get("/result/live");
-
       setResult(response.data);
     } catch (error) {
       console.error("Error fetching live result:", error);
@@ -29,15 +28,16 @@ function LiveResult() {
   };
 
   // ==========================
-  // Fetch Every 1 Second
+  // Fetch Live Result
   // ==========================
 
   useEffect(() => {
     fetchLiveResult();
 
+    // Check every 5 seconds instead of every 1 second
     const interval = setInterval(() => {
       fetchLiveResult();
-    }, 1000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
@@ -59,10 +59,10 @@ function LiveResult() {
       }, 10000);
 
       return () => clearInterval(interval);
-    } else {
-      setShowConfetti(false);
     }
-  }, [result]);
+
+    setShowConfetti(false);
+  }, [result?.mode]);
 
   // ==========================
   // Loading
@@ -70,9 +70,19 @@ function LiveResult() {
 
   if (loading) {
     return (
-      <section id="live" className="live-result">
+      <section
+        id="live"
+        className="live-result"
+        aria-labelledby="live-result-heading"
+      >
         <div className="result-card loading-card">
-          <h2>Loading Live Result...</h2>
+          <h2 id="live-result-heading">
+            Live Lottery Result
+          </h2>
+
+          <p aria-live="polite">
+            Loading the latest result...
+          </p>
         </div>
       </section>
     );
@@ -84,10 +94,19 @@ function LiveResult() {
 
   if (!result || result.success === false) {
     return (
-      <section id="live" className="live-result">
+      <section
+        id="live"
+        className="live-result"
+        aria-labelledby="live-result-heading"
+      >
         <div className="result-card error-card">
-          <h2>No Result Available</h2>
-          <p>Please check again later.</p>
+          <h2 id="live-result-heading">
+            Live Lottery Result
+          </h2>
+
+          <p>
+            No result is currently available. Please check again later.
+          </p>
         </div>
       </section>
     );
@@ -99,7 +118,17 @@ function LiveResult() {
 
   if (result.mode === "winner") {
     return (
-      <section id="live" className="live-result">
+      <section
+        id="live"
+        className="live-result"
+        aria-labelledby="live-result-heading"
+      >
+        <h2
+          id="live-result-heading"
+          className="sr-only"
+        >
+          Bombay Jackpot Raja Rani Live Lottery Result
+        </h2>
 
         {/* Confetti */}
         {showConfetti && (
@@ -110,7 +139,10 @@ function LiveResult() {
         )}
 
         {/* Falling Sparkles */}
-        <div className="sparkles">
+        <div
+          className="sparkles"
+          aria-hidden="true"
+        >
           {[...Array(25)].map((_, i) => (
             <span
               key={i}
@@ -126,21 +158,29 @@ function LiveResult() {
         </div>
 
         {/* Result Card */}
-        <div className="result-card">
-
-          {/* Animated Border Rays */}
-          <div className="border-rays"></div>
+        <div
+          className="result-card"
+          aria-live="polite"
+        >
+          <div
+            className="border-rays"
+            aria-hidden="true"
+          ></div>
 
           {/* Winner Badge */}
           <div className="winner-image-container">
             <img
               src={winnerBadge}
-              alt="Winner Badge"
+              alt="Winning result badge for Bombay Jackpot Raja Rani"
               className="winner-image"
             />
 
-            {/* Ticket Number */}
-            <div className="ticket-number-overlay">
+            <div
+              className="ticket-number-overlay"
+              aria-label={`Winning ticket number ${
+                result.data.ticketNumber
+              }${result.data.hasX ? "X" : ""}`}
+            >
               {result.data.ticketNumber}
               {result.data.hasX ? "X" : ""}
             </div>
@@ -154,7 +194,6 @@ function LiveResult() {
               {result.data.drawTime}
             </strong>
           </div>
-
         </div>
       </section>
     );
@@ -165,14 +204,23 @@ function LiveResult() {
   // ==========================
 
   return (
-    <section id="live" className="live-result">
+    <section
+      id="live"
+      className="live-result"
+      aria-labelledby="live-countdown-heading"
+    >
+      <h2
+        id="live-countdown-heading"
+        className="sr-only"
+      >
+        Upcoming Bombay Jackpot Raja Rani Lottery Draw
+      </h2>
 
       <Countdown
         drawTime={result.drawTime}
         visibleAt={result.visibleAt}
         onComplete={fetchLiveResult}
       />
-
     </section>
   );
 }

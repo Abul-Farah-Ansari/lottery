@@ -136,86 +136,43 @@ const addResult = async (req, res) => {
   }
 };
 
-// ======================================
-// Live Result API
-// ======================================
 const getLiveResult = async (req, res) => {
   try {
     const now = new Date();
 
-    const results = await Result.find().sort({
-      visibleAt: 1,
-    });
+    const currentResult = await Result.findOne({
+      visibleAt: { $lte: now },
+    })
+      .sort({ visibleAt: -1 })
+      .select("ticketNumber hasX drawDate drawTime visibleAt");
 
-    if (!results.length) {
+    if (!currentResult) {
       return res.status(404).json({
         success: false,
-        message: "No results available.",
+        message: "No live result found.",
       });
     }
 
-    let currentWinner = null;
+    const actualDrawTime = new Date(
+      currentResult.visibleAt.getTime() + 5 * 60 * 1000
+    );
 
-    for (const result of results) {
-      // visibleAt stored in DB = 5 minutes before draw
-      const countdownStart = new Date(
-        result.visibleAt
-      );
-
-      // Actual draw time
-      const actualDrawTime = new Date(
-        countdownStart.getTime() +
-          5 * 60 * 1000
-      );
-
-      // Before countdown -> show previous winner
-      if (now < countdownStart) {
-        if (currentWinner) {
-          return res.status(200).json({
-            success: true,
-            mode: "winner",
-            data: currentWinner,
-          });
-        }
-
-        continue;
-      }
-
-      // Countdown - last 5 minutes
-      if (
-        now >= countdownStart &&
-        now < actualDrawTime
-      ) {
-        return res.status(200).json({
-          success: true,
-          mode: "countdown",
-          drawTime: result.drawTime,
-
-          // Send DRAW TIME to frontend
-          // so countdown runs
-          visibleAt: actualDrawTime,
-
-          serverTime: now,
-        });
-      }
-
-      // Draw completed
-      if (now >= actualDrawTime) {
-        currentWinner = result;
-      }
-    }
-
-    if (currentWinner) {
+    // Countdown
+    if (now < actualDrawTime) {
       return res.status(200).json({
         success: true,
-        mode: "winner",
-        data: currentWinner,
+        mode: "countdown",
+        drawTime: currentResult.drawTime,
+        visibleAt: actualDrawTime,
+        serverTime: now,
       });
     }
 
-    return res.status(404).json({
-      success: false,
-      message: "No live result found.",
+    // Winner
+    return res.status(200).json({
+      success: true,
+      mode: "winner",
+      data: currentResult,
     });
   } catch (error) {
     console.error("Live Result Error:", error);

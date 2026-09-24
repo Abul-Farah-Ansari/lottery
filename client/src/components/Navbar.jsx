@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import "../styles/navbar.css";
 
-
-
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  const closeMenu = () => setMenuOpen(false);
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,60 +31,100 @@ function Navbar() {
 
   return (
     <>
-      <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
-
-        {/* Left Card */}
-      
+      <nav
+        className={`navbar ${scrolled ? "scrolled" : ""}`}
+        aria-label="Main navigation"
+      >
         <div className="nav-container">
 
-          {/* Logo */}
-          <a href="/" className="logo" onClick={closeMenu}>
-            <span className="logo-icon">🎰</span>
+          {/* ==========================
+              Logo / Brand
+          ========================== */}
+          <a
+            href="/"
+            className="logo"
+            onClick={closeMenu}
+            aria-label="Bombay Jackpot Raja Rani home"
+          >
+            <span
+              className="logo-icon"
+              aria-hidden="true"
+            >
+              🎰
+            </span>
 
             <div className="logo-text">
-              <h2>Bombay Jackpot</h2>
-              <p>Live Lottery Results</p>
+              <span className="logo-title">
+                Bombay Jackpot
+              </span>
+
+              <span className="logo-subtitle">
+                Live Lottery Results
+              </span>
             </div>
           </a>
 
-          {/* Navigation */}
-          <div className={`nav-links ${menuOpen ? "active" : ""}`}>
-            <a href="/" onClick={closeMenu}>
+          {/* ==========================
+              Navigation Links
+          ========================== */}
+          <div
+            id="main-navigation"
+            className={`nav-links ${menuOpen ? "active" : ""}`}
+          >
+            <a
+              href="/"
+              onClick={closeMenu}
+              aria-current="page"
+            >
               Home
             </a>
-              <a href="#history" onClick={closeMenu}>
+
+            <a
+              href="#history"
+              onClick={closeMenu}
+            >
               Winner List
             </a>
 
-            <a href="#rules" onClick={closeMenu}>
+            <a
+              href="#rules"
+              onClick={closeMenu}
+            >
               Rules
             </a>
-
-          
           </div>
 
-          {/* Hamburger */}
+          {/* ==========================
+              Mobile Menu Button
+          ========================== */}
           <button
+            type="button"
             className={`hamburger ${menuOpen ? "active" : ""}`}
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle Menu"
+            onClick={() => setMenuOpen((prev) => !prev)}
+            aria-label={
+              menuOpen
+                ? "Close navigation menu"
+                : "Open navigation menu"
+            }
+            aria-expanded={menuOpen}
+            aria-controls="main-navigation"
           >
-            <span></span>
-            <span></span>
-            <span></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
           </button>
 
         </div>
-
-        {/* Right Card */}
-       
       </nav>
 
-      {/* Mobile Overlay */}
+      {/* ==========================
+          Mobile Overlay
+      ========================== */}
       {menuOpen && (
         <div
           className="menu-overlay"
           onClick={closeMenu}
+          aria-hidden="true"
         ></div>
       )}
     </>
