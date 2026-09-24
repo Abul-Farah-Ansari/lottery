@@ -76,7 +76,11 @@ function Hero() {
               <span className="rani-text">Rani</span>
             </p>
 
-            
+            <p className="hero-description">
+              Check Bombay Jackpot Raja Rani live lottery results,
+              winning ticket numbers, previous results and upcoming
+              draw timings.
+            </p>
 
           </div>
 
